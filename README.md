@@ -1,143 +1,117 @@
-# 📱💸 App-Flet: Controle Financeiro Lúdico
+# 🩸 ApathyInject Core (AIC)
 
-![Python](https://img.shields.io/badge/Python-3.12%2B-blue?logo=python&logoColor=white)
-![Flet](https://img.shields.io/badge/Flet-0.84-purple?logo=flutter&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Security](https://img.shields.io/badge/security-bandit%20passed-brightgreen)
+![Manifest V3](https://img.shields.io/badge/manifest-v3-8a2be2?style=flat-square)
+![100% Client-Side](https://img.shields.io/badge/100%25-client--side-00ff9c?style=flat-square&labelColor=060608)
+![Zero APIs](https://img.shields.io/badge/APIs%20externas-zero-black?style=flat-square)
+![Tests](https://img.shields.io/badge/testes-56%20passing-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/licença-MIT-555?style=flat-square)
 
-> **Um aplicativo mobile-first feito em Python com Flet para brincar de finanças. Rápido, fluido (60 fps) e com CRUD completo!**
+> **Framework de manipulação de DOM focado em estética invasiva e não-destrutiva.**
+> Injeção de temas visuais em qualquer página web — sem alterar uma linha da funcionalidade original do site hospedeiro.
 
----
-
-## 🎯 Objetivo
-
-Este projeto é um **sandbox** para explorar o desenvolvimento de interfaces reativas em Python usando **Flet**. O foco é diversão e aprendizado, não uma solução financeira séria.
+O AIC subverte a interface de qualquer página via CSS injetado diretamente pelo `chrome.scripting` do Manifest V3. Opera 100% no *client-side*: ignora a nuvem, recusa APIs pagas, zero latência.
 
 ---
 
-## ✨ Funcionalidades
+## ⚡ Como instalar
 
-| Recurso | Descrição |
-|:--------|:----------|
-| 🏠 **Dashboard** | Saldo em tempo real com cores que indicam saúde financeira. |
-| ➕ **Adicionar** | FAB flutuante para criar novas receitas/despesas. |
-| ✏️ **Editar** | Botão de edição em cada linha (abre dialog). |
-| 🗑️ **Excluir** | Swipe-to-delete ou botão dedicado. |
-| 📊 **Gráficos** | Colunas animadas comparando receitas vs. despesas. |
-| 📱 **Mobile‑first** | Layout responsivo com drawer lateral e bottom navigation. |
-| 🎨 **Cores Vibrantes** | Paleta púrpura, teal e verde/vermelho para feedback imediato. |
-| ✅ **Testes** | Cobertura de lógica com unittest e análise de segurança via bandit. |
+```
+chrome://extensions  →  Modo do desenvolvedor  →  Carregar sem compactação
+→  apontar para  apathyinject-core/
+```
+
+Atalho global: **`Alt + Shift + A`** — ativa/desativa o último tema sem abrir o painel.
 
 ---
 
-## 🛠️ Tecnologias
+## 🧠 Filosofia
 
-- **Python 3.12** – linguagem base.
-- **Flet 0.84** – framework UI declarativo (Flutter para Python).
-- **Flet Charts** – gráficos de colunas animados.
-- **Bandit** – linter de segurança estática.
-- **Unittest** – testes automatizados.
+| Princípio | Implementação |
+|:----------|:-------------|
+| **Injeção Assíncrona** | Apenas o CSS do tema clicado entra no documento (*lazy loading*). A GPU assume o trabalho pesado. |
+| **Protocolo Fantasma** | Todo efeito visual carrega `pointer-events: none`. Você vê o caos, mas clica na página perfeitamente. |
+| **Orquestrador Terminal** | Chat de suporte **sem LLM**. Regex gatekeeper: responde sobre a doc, bloqueia fuga de escopo. |
+| **JSON-Driven** | O catálogo de temas vive em `themes_config.json`. Adicionar 50 temas = editar o JSON, sem tocar no HTML. |
 
 ---
 
-## 🚀 Como Executar
+## 🗂️ Estrutura
 
-### 1. Clone o repositório
+```
+apathyinject-core/          ← extensão Chrome (Manifest V3)
+├── manifest.json           # MV3 + comando global Alt+Shift+A
+├── background.js           # Service worker: atalho + auto-injeção por URL
+├── popup.html / .css / .js # NihilUI — painel brutalista (4 abas)
+├── themes_config.json      # Catálogo JSON-driven dos 12 temas
+├── knowledge_base.json     # Base do Orquestrador, isolada do código
+├── shared/
+│   ├── orchestrator.js     # Regex gatekeeper (UMD: popup + Node)
+│   └── injector.js         # Vetor de injeção (lazy loading, estado por aba)
+├── themes/                 # 12 × inject-*.css (Protocolo Fantasma)
+│   ├── inject-copa.css         ⚽ Copa do Mundo
+│   ├── inject-natal.css        🎄 Natal
+│   ├── inject-cyber.css        🌆 Cyberpunk
+│   ├── inject-matrix.css       🟩 Matrix
+│   ├── inject-halloween.css    🎃 Halloween
+│   ├── inject-namorados.css    ❤️  Namorados
+│   ├── inject-carnaval.css     🎉 Carnaval
+│   ├── inject-junina.css       🌽 Festa Junina
+│   ├── inject-primavera.css    🌸 Primavera
+│   ├── inject-verao.css        ☀️  Verão
+│   ├── inject-outono.css       🍂 Outono
+│   └── inject-inverno.css      ❄️  Inverno
+└── test_orchestrator.js    # Suíte Node, zero dependências
+```
+
+---
+
+## 🎨 Painel NihilUI
+
+O popup tem **4 abas**:
+
+- **INJECT** — grid de 12 injetores com controle de intensidade (ECO / PADRÃO / BRUTAL) + roleta aleatória + `CLEAR STATE`
+- **CUSTOM** — Custom Builder: escreva CSS próprio com template completo gerado automaticamente; salvo no `storage` local
+- **REGRAS** — white/black-list de URLs para auto-injeção por padrão (`BLOCK` sempre vence)
+- **TERM** — Orquestrador Terminal: regex gatekeeper que responde *"quem é você?"*, *"o que você faz?"*, `temas`, `help`, e bloqueia escopo
+
+---
+
+## 🗺️ Roadmap
+
+| Fase | Objetivo | Status |
+|:-----|:---------|:------:|
+| 🟢 **1 · Fundação** | Motor de injeção, 12 temas, expurgo, terminal | ✅ |
+| 🟡 **2 · Otimização** | Lazy loading, `knowledge_base.json` isolado, atalho global | ✅ |
+| 🔴 **3 · Autonomia** | Custom Builder + white/black-list de URLs | ✅ |
+
+---
+
+## 🧪 Testes
+
 ```bash
-git clone https://github.com/hfkyxg/app-flet.git
-cd app-flet
+cd apathyinject-core
+node test_orchestrator.js
+# JSON files parse OK
+# ✓ "quem é você?" → identity
+# ✓ "o que você faz?" → capabilities
+# ... 56 passed, 0 failed
 ```
 
-### 2. Crie e ative um ambiente virtual (Windows)
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
-
-### 3. Instale as dependências
-```bash
-pip install flet bandit
-```
-
-### 4. Rode o aplicativo
-```bash
-python main.py
-```
-> O app abrirá em uma janela simulando um dispositivo móvel (400×800).
+Valida: JSONs, 12 temas com `pointer-events:none` + `prefers-reduced-motion`, respostas do Orquestrador, bloqueio de escopo, interpolação de variáveis.
 
 ---
 
-## 🧪 Testes e Segurança
+## 🔒 Privacidade
 
-### Executar testes unitários
-```bash
-python -m unittest test_main.py
-```
-
-### Verificar vulnerabilidades
-```bash
-bandit -r . -f json
-```
-> O Bandit não aponta falhas críticas no código‑base; os avisos são referentes a bibliotecas de terceiros (asserts em código de teste, etc.).
-
----
-
-## 📂 Estrutura do Projeto
-
-```
-app-flet/
-├── main.py          # Aplicativo principal (UI + lógica)
-├── test_main.py     # Testes unitários da lógica de transações
-├── .gitignore      # Arquivos ignorados pelo Git
-└── README.md       # Este arquivo
-```
-
----
-
-## 🎨 Personalização
-
-Quer trocar cores? Edite as constantes de `ft.Colors` no `main.py`.  
-Quer mais gráficos? Adicione novos `ft.ChartData` na função `_chart_data`.
-
----
-
-## ⚠️ Aviso Legal
-
-Este software é apenas para **fins de diversão e aprendizado**. Não utilize para gerenciar finanças reais sem as devidas validações e segurança.
-
----
-
-## 🤝 Contribuindo
-
-1. Faça um fork.
-2. Crie uma branch: `git checkout -b minha-feature`.
-3. Commit: `git commit -m "feat: minha nova feature"`.
-4. Push: `git push origin minha-feature`.
-5. Abra um Pull Request.
-
----
-
-## 📜 Licença
-
-Distribuído sob a licença **MIT**. Veja `LICENSE` para mais informações.
-
----
-
-## 📸 Preview
-
-| Dashboard | Drawer | Gráficos |
-|:----------|:-------|:---------|
-| *[Adicione um GIF ou screenshot aqui]* | *[Adicione um GIF ou screenshot aqui]* | *[Adicione um GIF ou screenshot aqui]* |
-
-> 💡 **Dica:** Use ferramentas como **ScreenToGif** para gravar a tela do app e gerar GIFs pequenos.
+Zero telemetria · zero requisições de rede · zero APIs externas.
+Temas customizados e regras vivem apenas no `storage` local do seu navegador.
 
 ---
 
 ## 📬 Contato
 
-- Autor: **Frank** (hfkyxg)
-- GitHub: [@hfkyxg](https://github.com/hfkyxg)
+Autor: **Frank** · [@hfkyxg](https://github.com/hfkyxg)
 
 ---
 
-⭐ **Gostou? Deixe uma estrela no repositório!** ⭐
+<sub>⭐ Gostou? Deixe uma estrela no repositório!</sub>
