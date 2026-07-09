@@ -1,0 +1,52 @@
+/* ═══ AIC :: inject-outono.css — OUTONO ═══
+   Folhas secas girando na queda + entardecer âmbar.
+   Protocolo Fantasma: pointer-events none, GPU only. */
+
+html::before {
+  content: "🍂      🍁        🍂    🍃      🍂 \A     🍁    🍂      🍃        🍁 \A 🍂      🍃        🍁    🍂      🍁 \A     🍂    🍁      🍂        🍃 \A 🍂      🍁        🍂    🍃      🍂 \A     🍁    🍂      🍃        🍁 \A 🍂      🍃        🍁    🍂      🍁 \A     🍂    🍁      🍂        🍃 " !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 200vh;
+  white-space: pre;
+  line-height: 25vh;
+  font-size: 19px;
+  letter-spacing: 4vw;
+  text-indent: 2vw;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.8 * var(--aic-alpha, 1));
+  animation: aic-outono-folhas calc(15s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.6 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(212, 130, 60, 0.26), transparent 65%),
+    radial-gradient(ellipse 120% 45% at 50% 112%, rgba(120, 60, 20, 0.30), transparent 70%),
+    linear-gradient(rgba(212, 163, 115, 0.08), rgba(212, 163, 115, 0.08));
+  animation: aic-outono-tarde calc(8s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+@keyframes aic-outono-folhas {
+  0%   { transform: translateY(-100vh) translateX(0) rotate(0deg); }
+  25%  { transform: translateY(-72vh) translateX(3vw) rotate(4deg); }
+  50%  { transform: translateY(-46vh) translateX(-2vw) rotate(-3deg); }
+  75%  { transform: translateY(-22vh) translateX(2.5vw) rotate(3deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+
+@keyframes aic-outono-tarde {
+  from { opacity: calc(0.6 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.42 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

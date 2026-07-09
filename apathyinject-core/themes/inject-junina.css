@@ -1,0 +1,51 @@
+/* ═══ AIC :: inject-junina.css — FESTA JUNINA ═══
+   Bandeirinhas balançando no topo + balões subindo ao fundo.
+   Protocolo Fantasma: pointer-events none, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0; left: -5vw;
+  width: 110vw; height: 38px;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.95 * var(--aic-alpha, 1));
+  transform-origin: 50% 0;
+  background:
+    linear-gradient(#8d5524 0 4px, transparent 4px),
+    conic-gradient(from 121deg at 25% 4px, #e63946 0 118deg, transparent 118deg) 0 0 / 96px 38px repeat-x,
+    conic-gradient(from 121deg at 75% 4px, #f4a261 0 118deg, transparent 118deg) 0 0 / 96px 38px repeat-x;
+  animation: aic-junina-vento calc(3.5s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+html::after {
+  content: "🎈      🌽        🎈    🔥      🎈 \A     🎈    🌽      🎈        🔥 \A 🎈      🌽        🎈    🔥      🎈 \A     🎈    🌽      🎈        🔥 " !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 200vh;
+  white-space: pre;
+  line-height: 50vh;
+  font-size: 20px;
+  letter-spacing: 5vw;
+  text-indent: 3vw;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.65 * var(--aic-alpha, 1));
+  animation: aic-junina-baloes calc(16s / var(--aic-speed, 1)) linear infinite;
+}
+
+@keyframes aic-junina-vento {
+  from { transform: skewX(-3deg); }
+  to   { transform: skewX(3deg); }
+}
+
+@keyframes aic-junina-baloes {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100vh); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

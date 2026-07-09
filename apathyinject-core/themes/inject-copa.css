@@ -1,0 +1,55 @@
+/* ═══ AIC :: inject-copa.css — COPA DO MUNDO ═══
+   Confete verde-amarelo + brilho de estádio.
+   Protocolo Fantasma: pointer-events none, ≤100 partículas, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 9px; height: 14px;
+  background: transparent;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.95 * var(--aic-alpha, 1));
+  box-shadow:
+    4vw  -8vh  0 0 #009c3b,  11vw -34vh 0 0 #ffdf00,
+    18vw -16vh 0 1px #002776, 25vw -52vh 0 0 #009c3b,
+    32vw -26vh 0 0 #ffdf00,  39vw -70vh 0 1px #ffdf00,
+    46vw -12vh 0 0 #009c3b,  53vw -44vh 0 0 #ffffff,
+    60vw -30vh 0 1px #ffdf00, 67vw -62vh 0 0 #009c3b,
+    74vw -18vh 0 0 #002776,  81vw -50vh 0 1px #ffdf00,
+    88vw -36vh 0 0 #009c3b,  95vw -74vh 0 0 #ffdf00,
+    8vw  -84vh 0 1px #ffffff, 29vw -90vh 0 0 #009c3b,
+    50vw -96vh 0 0 #ffdf00,  71vw -88vh 0 1px #002776,
+    92vw -94vh 0 0 #009c3b,  15vw -58vh 0 0 #ffdf00,
+    58vw -80vh 0 0 #009c3b,  84vw -24vh 0 1px #ffffff;
+  animation: aic-copa-confete calc(7s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.55 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 120% 45% at 50% 108%, rgba(0, 156, 59, 0.35), transparent 70%),
+    radial-gradient(ellipse 80% 30% at 50% -8%, rgba(255, 223, 0, 0.22), transparent 65%),
+    linear-gradient(115deg, transparent 42%, rgba(255, 223, 0, 0.06) 50%, transparent 58%);
+  animation: aic-copa-holofote calc(5s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+@keyframes aic-copa-confete {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(125vh) rotate(340deg); }
+}
+
+@keyframes aic-copa-holofote {
+  from { transform: translateX(-3vw); }
+  to   { transform: translateX(3vw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

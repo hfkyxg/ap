@@ -1,0 +1,58 @@
+/* ═══ AIC :: inject-halloween.css — HALLOWEEN ═══
+   Brasas subindo do rodapé + névoa roxa pulsante.
+   Protocolo Fantasma: pointer-events none, ≤100 partículas, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.85 * var(--aic-alpha, 1));
+  box-shadow:
+    5vw  108vh 0 0 #ff7b00,  13vw 132vh 0 1px #ffb700,
+    21vw 116vh 0 0 #ff4d00,  29vw 148vh 0 0 #ff7b00,
+    37vw 124vh 0 1px #ffb700, 45vw 160vh 0 0 #ff4d00,
+    53vw 112vh 0 0 #ff7b00,  61vw 140vh 0 1px #ff4d00,
+    69vw 126vh 0 0 #ffb700,  77vw 154vh 0 0 #ff7b00,
+    85vw 118vh 0 1px #ff4d00, 93vw 144vh 0 0 #ffb700,
+    9vw  168vh 0 0 #ff7b00,  33vw 176vh 0 1px #ffb700,
+    57vw 172vh 0 0 #ff4d00,  81vw 182vh 0 0 #ff7b00,
+    17vw 188vh 0 1px #ff4d00, 49vw 194vh 0 0 #ffb700,
+    73vw 190vh 0 0 #ff7b00,  97vw 178vh 0 1px #ffb700;
+  animation: aic-hallo-brasas calc(9s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.7 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 130% 55% at 50% 112%, rgba(255, 100, 0, 0.28), transparent 65%),
+    radial-gradient(ellipse 90% 60% at 15% -10%, rgba(90, 20, 130, 0.35), transparent 70%),
+    radial-gradient(ellipse 90% 60% at 85% -10%, rgba(60, 10, 90, 0.35), transparent 70%),
+    radial-gradient(ellipse 150% 100% at 50% 50%, transparent 60%, rgba(15, 0, 25, 0.5) 100%);
+  animation: aic-hallo-nevoa calc(6s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+@keyframes aic-hallo-brasas {
+  0%   { transform: translateY(0) translateX(0); }
+  30%  { transform: translateY(-45vh) translateX(1.5vw); }
+  60%  { transform: translateY(-90vh) translateX(-1.5vw); }
+  100% { transform: translateY(-205vh) translateX(0.5vw); }
+}
+
+@keyframes aic-hallo-nevoa {
+  from { opacity: calc(0.7 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.45 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

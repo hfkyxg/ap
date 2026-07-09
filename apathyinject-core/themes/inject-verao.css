@@ -1,0 +1,60 @@
+/* ═══ AIC :: inject-verao.css — VERÃO ═══
+   Sol girando no canto, lens flare e calor dourado.
+   Protocolo Fantasma: pointer-events none, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: -60vh; right: -60vh;
+  width: 120vh; height: 120vh;
+  border-radius: 50%;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.55 * var(--aic-alpha, 1));
+  background:
+    conic-gradient(
+      rgba(255, 183, 3, 0.30) 0 10deg, transparent 10deg 30deg,
+      rgba(255, 183, 3, 0.24) 30deg 40deg, transparent 40deg 60deg,
+      rgba(255, 183, 3, 0.30) 60deg 70deg, transparent 70deg 90deg,
+      rgba(255, 183, 3, 0.24) 90deg 100deg, transparent 100deg 120deg,
+      rgba(255, 183, 3, 0.30) 120deg 130deg, transparent 130deg 150deg,
+      rgba(255, 183, 3, 0.24) 150deg 160deg, transparent 160deg 180deg,
+      rgba(255, 183, 3, 0.30) 180deg 190deg, transparent 190deg 210deg,
+      rgba(255, 183, 3, 0.24) 210deg 220deg, transparent 220deg 240deg,
+      rgba(255, 183, 3, 0.30) 240deg 250deg, transparent 250deg 270deg,
+      rgba(255, 183, 3, 0.24) 270deg 280deg, transparent 280deg 300deg,
+      rgba(255, 183, 3, 0.30) 300deg 310deg, transparent 310deg 330deg,
+      rgba(255, 183, 3, 0.24) 330deg 340deg, transparent 340deg 360deg);
+  animation: aic-verao-sol calc(24s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.6 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(circle 20vh at 88% 8%, rgba(255, 240, 160, 0.5), transparent 70%),
+    radial-gradient(circle 4vh at 62% 34%, rgba(255, 220, 130, 0.28), transparent 70%),
+    radial-gradient(circle 2.5vh at 46% 52%, rgba(255, 200, 100, 0.22), transparent 70%),
+    radial-gradient(circle 1.5vh at 32% 68%, rgba(255, 200, 100, 0.18), transparent 70%),
+    linear-gradient(200deg, rgba(255, 183, 3, 0.10), transparent 55%),
+    radial-gradient(ellipse 120% 40% at 50% 112%, rgba(0, 150, 199, 0.16), transparent 70%);
+  animation: aic-verao-calor calc(5s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+@keyframes aic-verao-sol {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes aic-verao-calor {
+  from { opacity: calc(0.6 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.42 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

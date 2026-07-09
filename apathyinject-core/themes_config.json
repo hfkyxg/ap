@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "themes": [
+    {
+      "id": "copa",
+      "name": "Copa do Mundo",
+      "emoji": "⚽",
+      "file": "themes/inject-copa.css",
+      "accent": "#ffdf00",
+      "description": "Confete verde-amarelo e clima de hexa."
+    },
+    {
+      "id": "natal",
+      "name": "Natal",
+      "emoji": "🎄",
+      "file": "themes/inject-natal.css",
+      "accent": "#e63946",
+      "description": "Neve caindo e luzes de fim de ano."
+    },
+    {
+      "id": "cyber",
+      "name": "Cyberpunk",
+      "emoji": "🌆",
+      "file": "themes/inject-cyber.css",
+      "accent": "#ff00e6",
+      "description": "Scanlines, glitch e neon magenta/ciano."
+    },
+    {
+      "id": "matrix",
+      "name": "Matrix",
+      "emoji": "🟩",
+      "file": "themes/inject-matrix.css",
+      "accent": "#00ff41",
+      "description": "Chuva digital verde sobre a página."
+    },
+    {
+      "id": "halloween",
+      "name": "Halloween",
+      "emoji": "🎃",
+      "file": "themes/inject-halloween.css",
+      "accent": "#ff7b00",
+      "description": "Brasas laranja subindo e névoa roxa."
+    },
+    {
+      "id": "namorados",
+      "name": "Namorados",
+      "emoji": "❤️",
+      "file": "themes/inject-namorados.css",
+      "accent": "#ff4d6d",
+      "description": "Corações intangíveis flutuando."
+    },
+    {
+      "id": "carnaval",
+      "name": "Carnaval",
+      "emoji": "🎉",
+      "file": "themes/inject-carnaval.css",
+      "accent": "#9b5de5",
+      "description": "Confete multicolorido em queda livre."
+    },
+    {
+      "id": "junina",
+      "name": "Festa Junina",
+      "emoji": "🌽",
+      "file": "themes/inject-junina.css",
+      "accent": "#f4a261",
+      "description": "Bandeirinhas no topo e balões."
+    },
+    {
+      "id": "primavera",
+      "name": "Primavera",
+      "emoji": "🌸",
+      "file": "themes/inject-primavera.css",
+      "accent": "#ffafcc",
+      "description": "Pétalas de cerejeira à deriva."
+    },
+    {
+      "id": "verao",
+      "name": "Verão",
+      "emoji": "☀️",
+      "file": "themes/inject-verao.css",
+      "accent": "#ffb703",
+      "description": "Brilho solar quente no canto da tela."
+    },
+    {
+      "id": "outono",
+      "name": "Outono",
+      "emoji": "🍂",
+      "file": "themes/inject-outono.css",
+      "accent": "#d4a373",
+      "description": "Folhas secas caindo em tom âmbar."
+    },
+    {
+      "id": "inverno",
+      "name": "Inverno",
+      "emoji": "❄️",
+      "file": "themes/inject-inverno.css",
+      "accent": "#a2d2ff",
+      "description": "Neve fina e vinheta congelada."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+/* ═══ AIC :: inject-carnaval.css — CARNAVAL ═══
+   Confete retangular multicolorido girando + serpentina diagonal.
+   Protocolo Fantasma: pointer-events none, ≤100 partículas, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 7px; height: 12px;
+  background: transparent;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.95 * var(--aic-alpha, 1));
+  box-shadow:
+    3vw  -6vh  0 0 #9b5de5,  9vw  -40vh 0 1px #f15bb5,
+    15vw -20vh 0 0 #fee440,  21vw -58vh 0 0 #00bbf9,
+    27vw -12vh 0 1px #00f5d4, 33vw -46vh 0 0 #f15bb5,
+    39vw -30vh 0 0 #9b5de5,  45vw -68vh 0 1px #fee440,
+    51vw -16vh 0 0 #00bbf9,  57vw -50vh 0 0 #00f5d4,
+    63vw -34vh 0 1px #f15bb5, 69vw -74vh 0 0 #9b5de5,
+    75vw -22vh 0 0 #fee440,  81vw -56vh 0 1px #00bbf9,
+    87vw -42vh 0 0 #00f5d4,  93vw -80vh 0 0 #f15bb5,
+    6vw  -86vh 0 1px #fee440, 24vw -92vh 0 0 #9b5de5,
+    48vw -88vh 0 0 #00bbf9,  72vw -96vh 0 1px #00f5d4,
+    90vw -64vh 0 0 #fee440,  12vw -72vh 0 0 #f15bb5,
+    60vw -8vh  0 1px #9b5de5, 36vw -78vh 0 0 #00bbf9;
+  animation: aic-carna-confete calc(5s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.5 * var(--aic-alpha, 1));
+  background:
+    repeating-linear-gradient(115deg,
+      transparent 0 60px,
+      rgba(155, 93, 229, 0.07) 60px 68px,
+      transparent 68px 140px,
+      rgba(241, 91, 181, 0.07) 140px 148px,
+      transparent 148px 220px,
+      rgba(0, 187, 249, 0.07) 220px 228px),
+    radial-gradient(ellipse 120% 40% at 50% -10%, rgba(254, 228, 64, 0.16), transparent 65%),
+    radial-gradient(ellipse 120% 40% at 50% 110%, rgba(155, 93, 229, 0.18), transparent 65%);
+  animation: aic-carna-brilho calc(4s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+@keyframes aic-carna-confete {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+  50%  { transform: translateY(60vh) translateX(3vw) rotate(200deg); }
+  100% { transform: translateY(125vh) translateX(-2vw) rotate(400deg); }
+}
+
+@keyframes aic-carna-brilho {
+  from { opacity: calc(0.5 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.3 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

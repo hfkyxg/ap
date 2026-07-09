@@ -1,0 +1,53 @@
+/* ═══ AIC :: inject-matrix.css — MATRIX ═══
+   Chuva digital verde em três velocidades + tint de terminal.
+   Protocolo Fantasma: pointer-events none, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.65 * var(--aic-alpha, 1));
+  background-image:
+    repeating-linear-gradient(to bottom,
+      rgba(0, 255, 65, 0.28) 0 14px, transparent 14px 90px),
+    repeating-linear-gradient(to bottom,
+      rgba(0, 255, 65, 0.18) 0 22px, transparent 22px 130px),
+    repeating-linear-gradient(to bottom,
+      rgba(140, 255, 170, 0.10) 0 8px, transparent 8px 70px);
+  background-size: 3px 180px, 3px 260px, 2px 140px;
+  background-position: 0 0, 0 0, 0 0;
+  background-repeat: repeat;
+  -webkit-mask-image: repeating-linear-gradient(to right,
+    #000 0 3px, transparent 3px 28px,
+    #000 28px 31px, transparent 31px 47px,
+    #000 47px 49px, transparent 49px 80px);
+  mask-image: repeating-linear-gradient(to right,
+    #000 0 3px, transparent 3px 28px,
+    #000 28px 31px, transparent 31px 47px,
+    #000 47px 49px, transparent 49px 80px);
+  animation: aic-matrix-rain calc(1.4s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.6 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 140% 90% at 50% 50%, transparent 55%, rgba(0, 20, 8, 0.55) 100%),
+    linear-gradient(rgba(0, 255, 65, 0.05), rgba(0, 255, 65, 0.05)),
+    repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.12) 2px 3px);
+}
+
+@keyframes aic-matrix-rain {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to   { background-position: 0 180px, 0 260px, 0 140px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before { animation: none !important; }
+}

@@ -1,0 +1,71 @@
+/* ═══ AIC :: inject-natal.css — NATAL ═══
+   Neve em duas profundidades + varal de luzes piscando no topo.
+   Protocolo Fantasma: pointer-events none, ≤100 partículas, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.9 * var(--aic-alpha, 1));
+  box-shadow:
+    3vw  -6vh  0 0 #ffffff,  9vw  -38vh 0 2px #ffffff,
+    15vw -18vh 0 0 #eef6ff,  21vw -56vh 0 1px #ffffff,
+    27vw -10vh 0 2px #ffffff, 33vw -44vh 0 0 #eef6ff,
+    39vw -28vh 0 1px #ffffff, 45vw -66vh 0 0 #ffffff,
+    51vw -14vh 0 2px #eef6ff, 57vw -48vh 0 0 #ffffff,
+    63vw -32vh 0 1px #ffffff, 69vw -72vh 0 0 #eef6ff,
+    75vw -20vh 0 2px #ffffff, 81vw -54vh 0 0 #ffffff,
+    87vw -40vh 0 1px #eef6ff, 93vw -78vh 0 0 #ffffff,
+    6vw  -84vh 0 1px #ffffff, 30vw -92vh 0 2px #ffffff,
+    54vw -88vh 0 0 #eef6ff,  78vw -96vh 0 1px #ffffff,
+    96vw -26vh 0 0 #ffffff,  12vw -62vh 0 2px #ffffff,
+    66vw -8vh  0 0 #eef6ff,  42vw -82vh 0 1px #ffffff;
+  animation: aic-natal-neve calc(11s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.75 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(circle 5px at 4vw 14px,  #ff4d4d 40%, transparent 60%),
+    radial-gradient(circle 5px at 12vw 26px, #ffdf5e 40%, transparent 60%),
+    radial-gradient(circle 5px at 20vw 12px, #4dff88 40%, transparent 60%),
+    radial-gradient(circle 5px at 28vw 24px, #4db8ff 40%, transparent 60%),
+    radial-gradient(circle 5px at 36vw 14px, #ff4d4d 40%, transparent 60%),
+    radial-gradient(circle 5px at 44vw 26px, #ffdf5e 40%, transparent 60%),
+    radial-gradient(circle 5px at 52vw 12px, #4dff88 40%, transparent 60%),
+    radial-gradient(circle 5px at 60vw 24px, #4db8ff 40%, transparent 60%),
+    radial-gradient(circle 5px at 68vw 14px, #ff4d4d 40%, transparent 60%),
+    radial-gradient(circle 5px at 76vw 26px, #ffdf5e 40%, transparent 60%),
+    radial-gradient(circle 5px at 84vw 12px, #4dff88 40%, transparent 60%),
+    radial-gradient(circle 5px at 92vw 24px, #4db8ff 40%, transparent 60%),
+    radial-gradient(ellipse 100% 35% at 50% 110%, rgba(180, 30, 40, 0.20), transparent 70%),
+    radial-gradient(ellipse 100% 30% at 50% -10%, rgba(20, 90, 50, 0.25), transparent 70%);
+  animation: aic-natal-luzes calc(1.6s / var(--aic-speed, 1)) steps(2, jump-none) infinite;
+}
+
+@keyframes aic-natal-neve {
+  0%   { transform: translateY(0) translateX(0); }
+  25%  { transform: translateY(30vh) translateX(2vw); }
+  50%  { transform: translateY(62vh) translateX(-1.5vw); }
+  75%  { transform: translateY(94vh) translateX(2vw); }
+  100% { transform: translateY(125vh) translateX(0); }
+}
+
+@keyframes aic-natal-luzes {
+  0%, 100% { opacity: calc(0.75 * var(--aic-alpha, 1)); }
+  50%      { opacity: calc(0.45 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

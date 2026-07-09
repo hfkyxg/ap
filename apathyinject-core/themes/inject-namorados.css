@@ -1,0 +1,49 @@
+/* ═══ AIC :: inject-namorados.css — DIA DOS NAMORADOS ═══
+   Corações intangíveis caindo em loop contínuo + rubor rosa.
+   Protocolo Fantasma: pointer-events none, GPU only. */
+
+html::before {
+  content: "❤   💕     ❤       💖   ❤     💕 \A       💖     ❤   💕       ❤     💖 \A   ❤       💖   ❤     💕       ❤ \A     💕   ❤       💖     ❤   💕 \A ❤   💕     ❤       💖   ❤     💕 \A       💖     ❤   💕       ❤     💖 \A   ❤       💖   ❤     💕       ❤ \A     💕   ❤       💖     ❤   💕 " !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 200vh;
+  white-space: pre;
+  line-height: 25vh;
+  font-size: 22px;
+  letter-spacing: 3vw;
+  text-indent: 2vw;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.8 * var(--aic-alpha, 1));
+  animation: aic-love-queda calc(13s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.55 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 110%, rgba(255, 77, 109, 0.25), transparent 65%),
+    radial-gradient(ellipse 80% 60% at 80% -10%, rgba(255, 143, 171, 0.22), transparent 65%),
+    linear-gradient(rgba(255, 77, 109, 0.05), rgba(255, 77, 109, 0.05));
+  animation: aic-love-pulso calc(2.4s / var(--aic-speed, 1)) ease-in-out infinite;
+}
+
+@keyframes aic-love-queda {
+  from { transform: translateY(-100vh); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes aic-love-pulso {
+  0%, 100% { opacity: calc(0.55 * var(--aic-alpha, 1)); }
+  50%      { opacity: calc(0.38 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

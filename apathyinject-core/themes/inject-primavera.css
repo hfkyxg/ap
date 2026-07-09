@@ -1,0 +1,51 @@
+/* ═══ AIC :: inject-primavera.css — PRIMAVERA ═══
+   Pétalas de cerejeira à deriva + luz suave de jardim.
+   Protocolo Fantasma: pointer-events none, GPU only. */
+
+html::before {
+  content: "🌸    🌺      🌸        🌼    🌸 \A       🌼    🌸      🌺        🌸 \A   🌸        🌸    🌼      🌺 \A 🌺      🌸        🌸    🌼 \A 🌸    🌺      🌸        🌼    🌸 \A       🌼    🌸      🌺        🌸 \A   🌸        🌸    🌼      🌺 \A 🌺      🌸        🌸    🌼 " !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 200vh;
+  white-space: pre;
+  line-height: 25vh;
+  font-size: 18px;
+  letter-spacing: 4vw;
+  text-indent: 1vw;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.75 * var(--aic-alpha, 1));
+  animation: aic-prima-petala calc(18s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.5 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 70% 50% at 85% -5%, rgba(255, 236, 179, 0.30), transparent 65%),
+    radial-gradient(ellipse 100% 45% at 50% 110%, rgba(140, 200, 120, 0.22), transparent 70%),
+    linear-gradient(rgba(255, 175, 204, 0.06), rgba(255, 175, 204, 0.06));
+  animation: aic-prima-brisa calc(7s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+@keyframes aic-prima-petala {
+  0%   { transform: translateY(-100vh) translateX(0); }
+  30%  { transform: translateY(-68vh) translateX(2.5vw); }
+  60%  { transform: translateY(-38vh) translateX(-2vw); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes aic-prima-brisa {
+  from { opacity: calc(0.5 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.34 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

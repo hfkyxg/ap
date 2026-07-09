@@ -1,0 +1,61 @@
+/* ═══ AIC :: inject-inverno.css — INVERNO ═══
+   Neve fina e lenta + geada azulada nas bordas da tela.
+   Protocolo Fantasma: pointer-events none, ≤100 partículas, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.85 * var(--aic-alpha, 1));
+  box-shadow:
+    2vw  -4vh  0 0 #eaf6ff,  8vw  -36vh 0 1px #ffffff,
+    14vw -14vh 0 0 #cfe9ff,  20vw -52vh 0 0 #eaf6ff,
+    26vw -8vh  0 1px #ffffff, 32vw -42vh 0 0 #cfe9ff,
+    38vw -24vh 0 0 #eaf6ff,  44vw -64vh 0 1px #ffffff,
+    50vw -10vh 0 0 #cfe9ff,  56vw -46vh 0 0 #eaf6ff,
+    62vw -28vh 0 1px #ffffff, 68vw -70vh 0 0 #cfe9ff,
+    74vw -16vh 0 0 #eaf6ff,  80vw -50vh 0 1px #ffffff,
+    86vw -38vh 0 0 #cfe9ff,  92vw -76vh 0 0 #eaf6ff,
+    98vw -20vh 0 1px #ffffff, 5vw  -82vh 0 0 #cfe9ff,
+    35vw -88vh 0 0 #eaf6ff,  65vw -92vh 0 1px #ffffff,
+    95vw -86vh 0 0 #cfe9ff,  23vw -68vh 0 0 #eaf6ff,
+    53vw -78vh 0 1px #ffffff, 83vw -60vh 0 0 #cfe9ff;
+  animation: aic-inverno-neve calc(16s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.65 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 55% 45% at 0% 0%, rgba(200, 230, 255, 0.30), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 100% 0%, rgba(200, 230, 255, 0.28), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 0% 100%, rgba(180, 215, 250, 0.30), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(180, 215, 250, 0.28), transparent 60%),
+    linear-gradient(rgba(162, 210, 255, 0.07), rgba(162, 210, 255, 0.07));
+  animation: aic-inverno-geada calc(9s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+@keyframes aic-inverno-neve {
+  0%   { transform: translateY(0) translateX(0); }
+  33%  { transform: translateY(42vh) translateX(1.2vw); }
+  66%  { transform: translateY(84vh) translateX(-1.2vw); }
+  100% { transform: translateY(125vh) translateX(0); }
+}
+
+@keyframes aic-inverno-geada {
+  from { opacity: calc(0.65 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.5 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

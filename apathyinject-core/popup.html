@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>ApathyInject Core :: NihilUI</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="scanlines" aria-hidden="true"></div>
+
+  <header id="masthead">
+    <div id="brand">
+      <h1 class="glitch" data-text="APATHYINJECT CORE">APATHYINJECT CORE</h1>
+      <span id="tagline">NihilUI // estética invasiva, funcionalidade intacta</span>
+    </div>
+    <div id="status-cluster">
+      <span id="status-led" class="led led-ok" title="Estado do vetor"></span>
+      <span id="version-tag">v1.2.0</span>
+    </div>
+  </header>
+
+  <div id="host-bar">
+    <span id="host-label">ALVO ::</span>
+    <span id="host-url">resolvendo…</span>
+  </div>
+
+  <nav id="tab-nav" role="tablist">
+    <button class="tab-btn active" data-panel="panel-inject" role="tab">INJECT</button>
+    <button class="tab-btn" data-panel="panel-custom" role="tab">CUSTOM</button>
+    <button class="tab-btn" data-panel="panel-rules" role="tab">REGRAS</button>
+    <button class="tab-btn" data-panel="panel-term" role="tab">TERM</button>
+  </nav>
+
+  <!-- ══ PANEL: INJETORES ══ -->
+  <section id="panel-inject" class="panel active" role="tabpanel">
+    <div id="intensity-row">
+      <span class="row-label">INTENSIDADE ::</span>
+      <div id="intensity-switch">
+        <button class="intensity-btn" data-level="eco">ECO</button>
+        <button class="intensity-btn active" data-level="padrao">PADRÃO</button>
+        <button class="intensity-btn" data-level="brutal">BRUTAL</button>
+      </div>
+    </div>
+
+    <div id="theme-grid" aria-label="Catálogo de injetores">
+      <!-- Botões renderizados a partir de themes_config.json -->
+    </div>
+
+    <div id="action-row">
+      <button id="btn-random" class="action-btn" title="Injeta um tema aleatório do catálogo">
+        🎲 ROLETA
+      </button>
+      <button id="btn-clear" class="action-btn danger" title="Remove todo CSS injetado pelo AIC nesta aba">
+        ⌫ CLEAR STATE
+      </button>
+    </div>
+  </section>
+
+  <!-- ══ PANEL: CUSTOM BUILDER ══ -->
+  <section id="panel-custom" class="panel" role="tabpanel">
+    <p class="panel-hint">
+      Escreva seu próprio CSS de injeção. Fica salvo apenas no storage local
+      deste navegador. Regra de ouro: <code>pointer-events: none</code>.
+    </p>
+    <input id="custom-name" type="text" maxlength="24" placeholder="NOME DO TEMA (ex: VOID ROSA)" autocomplete="off" />
+    <textarea id="custom-css" rows="8" spellcheck="false"
+      placeholder="/* Seu CSS aqui — ou clique em GERAR TEMPLATE */"></textarea>
+    <div class="btn-row">
+      <button id="btn-template" class="action-btn">⚙ GERAR TEMPLATE</button>
+      <button id="btn-save-custom" class="action-btn confirm">💾 SALVAR TEMA</button>
+    </div>
+    <div id="custom-list">
+      <!-- Temas customizados renderizados aqui -->
+    </div>
+  </section>
+
+  <!-- ══ PANEL: REGRAS (WHITE/BLACK-LIST) ══ -->
+  <section id="panel-rules" class="panel" role="tabpanel">
+    <p class="panel-hint">
+      Auto-injeção por URL. <strong>ALLOW</strong> ativa o tema quando a URL
+      contiver o padrão; <strong>BLOCK</strong> (lista negra) impede qualquer
+      auto-injeção no padrão — e vence sempre.
+    </p>
+    <input id="rule-pattern" type="text" placeholder="padrão de URL (ex: github.com)" autocomplete="off" />
+    <div class="btn-row">
+      <select id="rule-mode">
+        <option value="allow">ALLOW → injetar tema</option>
+        <option value="block">BLOCK → nunca injetar</option>
+      </select>
+      <select id="rule-theme">
+        <!-- Preenchido com o catálogo -->
+      </select>
+    </div>
+    <div class="btn-row">
+      <button id="btn-add-rule" class="action-btn confirm">+ ADICIONAR REGRA</button>
+    </div>
+    <div id="rules-list">
+      <!-- Regras renderizadas aqui -->
+    </div>
+  </section>
+
+  <!-- ══ PANEL: TERMINAL (ORQUESTRADOR) ══ -->
+  <section id="panel-term" class="panel" role="tabpanel">
+    <div id="term-log" aria-live="polite"></div>
+    <div id="term-input-row">
+      <span id="term-prompt">&gt;</span>
+      <input id="term-input" type="text" placeholder="pergunte sobre o AIC… (help)" autocomplete="off" />
+      <span id="term-cursor" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <div id="toast-zone" aria-live="assertive"></div>
+
+  <script src="shared/orchestrator.js"></script>
+  <script src="shared/injector.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

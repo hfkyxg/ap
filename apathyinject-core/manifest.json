@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "ApathyInject Core (AIC)",
+  "short_name": "AIC",
+  "version": "1.2.0",
+  "description": "Framework de manipulação de DOM focado em estética invasiva e não-destrutiva. Injeção de temas visuais 100% client-side, zero nuvem, zero API.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ApathyInject Core :: NihilUI"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "commands": {
+    "toggle-last-theme": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "Ativa/desativa o último tema usado na aba atual"
+    }
+  }
+}

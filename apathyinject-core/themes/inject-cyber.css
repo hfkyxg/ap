@@ -1,0 +1,55 @@
+/* ═══ AIC :: inject-cyber.css — CYBERPUNK ═══
+   Scanlines, bandas de glitch varrendo a tela e vinheta neon.
+   Protocolo Fantasma: pointer-events none, GPU only. */
+
+html::before {
+  content: "" !important;
+  position: fixed !important;
+  top: -100vh; left: 0;
+  width: 100vw; height: 300vh;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  opacity: calc(0.6 * var(--aic-alpha, 1));
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 3px,
+      rgba(0, 229, 255, 0.05) 3px 4px
+    ),
+    linear-gradient(to bottom,
+      transparent 0%, rgba(255, 0, 230, 0.14) 2%, transparent 4%,
+      transparent 31%, rgba(0, 229, 255, 0.16) 33%, transparent 35%,
+      transparent 63%, rgba(255, 0, 230, 0.12) 64%, transparent 66%,
+      transparent 100%);
+  animation: aic-cyber-sweep calc(6s / var(--aic-speed, 1)) linear infinite;
+}
+
+html::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.7 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 70% 55% at 0% 100%, rgba(255, 0, 230, 0.22), transparent 65%),
+    radial-gradient(ellipse 70% 55% at 100% 0%, rgba(0, 229, 255, 0.22), transparent 65%),
+    linear-gradient(90deg, rgba(255, 0, 230, 0.05) 0 2px, transparent 2px 100%),
+    linear-gradient(270deg, rgba(0, 229, 255, 0.05) 0 2px, transparent 2px 100%);
+  animation: aic-cyber-flicker calc(3.5s / var(--aic-speed, 1)) steps(3, jump-none) infinite;
+}
+
+@keyframes aic-cyber-sweep {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100vh); }
+}
+
+@keyframes aic-cyber-flicker {
+  0%, 100% { opacity: calc(0.7 * var(--aic-alpha, 1)); }
+  33%      { opacity: calc(0.5 * var(--aic-alpha, 1)); }
+  66%      { opacity: calc(0.8 * var(--aic-alpha, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before, html::after { animation: none !important; }
+}

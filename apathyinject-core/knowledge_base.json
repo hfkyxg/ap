@@ -1,0 +1,285 @@
+{
+  "schema": 1,
+  "boot": "AIC ORCHESTRATOR v{{VERSION}} :: ONLINE\nGatekeeper de regex ativo. Zero LLM. Zero nuvem.\nDigite 'help' para ver os tópicos válidos.",
+  "restricted_notice": "ALERTA :: URL restrita detectada ({{URL}}). Extensões não têm permissão para agir em páginas internas do navegador. Injetores desabilitados nesta aba.",
+  "fallback": "ENTRADA NÃO MAPEADA :: Nenhum padrão da base de conhecimento corresponde a essa string. Meu vocabulário se limita à documentação do AIC. Digite 'help' para ver os tópicos válidos.",
+  "blocked": "FUGA DE ESCOPO BLOQUEADA :: Isso está fora da documentação do AIC. Não sou assistente geral, não converso sobre o mundo lá fora. Digite 'help' e fique no escopo.",
+  "cleared": "TERMINAL EXPURGADO :: Histórico do chat eliminado. O DOM da página não foi tocado — para isso use o botão CLEAR STATE.",
+  "commands": {
+    "clear": ["^>?\\s*clear$", "^limpar( terminal| chat| historico)?$"]
+  },
+  "blocked_patterns": [
+    "previsao do tempo",
+    "\\bclima\\b",
+    "\\breceita de\\b",
+    "\\bpoema\\b",
+    "\\bpoesia\\b",
+    "\\bpiada\\b",
+    "\\bmusica\\b",
+    "\\bnoticia",
+    "\\bfutebol de ontem\\b",
+    "escrev[ae].*(texto|redacao|email|artigo)",
+    "codigo (em|de) (python|java|c\\+\\+|ruby|go)\\b",
+    "\\btraduz",
+    "quanto (e|eh|da) \\d",
+    "\\bcalcul[ae]",
+    "sentido da vida",
+    "\\bbitcoin\\b",
+    "\\binvestimento"
+  ],
+  "entries": [
+    {
+      "id": "greeting",
+      "patterns": [
+        "^(oi|ola|eai|e ai|opa|salve|hey|hello|hi)\\b",
+        "^(bom dia|boa tarde|boa noite)\\b"
+      ],
+      "answer": "AIC ORCHESTRATOR :: Saudação registrada, retribuição desnecessária. Estou operacional. Pergunte algo sobre o AIC ou digite 'help'."
+    },
+    {
+      "id": "identity",
+      "patterns": [
+        "quem (e|eh|es) (voce|vc|tu)",
+        "quem es tu",
+        "^quem (e|eh) o aic",
+        "o que (voce|vc) (e|eh)\\b",
+        "(voce|vc) (e|eh) (um|uma) (ia|ai|robo|bot|llm|chatgpt|inteligencia artificial)",
+        "(voce|vc) (e|eh) humano",
+        "se apresent[ae]",
+        "sua identidade"
+      ],
+      "answer": "IDENTIDADE :: Sou o Orquestrador Terminal do ApathyInject Core. Não sou uma IA, não sou um LLM, não tenho sentimentos — sou um gatekeeper de validação estrita de strings (regex puro). Existo para responder sobre a documentação do AIC e bloquear qualquer tentativa de fuga de escopo. Nada além disso."
+    },
+    {
+      "id": "capabilities",
+      "patterns": [
+        "o que (voce|vc|tu) faz",
+        "o que (voce|vc) sabe( fazer)?",
+        "(qual|quais) (e |eh |sao )?(a |as )?sua(s)? (funcao|funcoes|utilidade|capacidade|habilidade)",
+        "p(a)?ra que (voce|vc|isso) serve",
+        "como (voce|vc) (pode|consegue)( me)? ajudar",
+        "o que (voce|vc) pode fazer",
+        "me ajud[ae]"
+      ],
+      "answer": "FUNÇÃO :: Eu respondo, por correspondência de padrões, perguntas sobre a documentação do AIC: o que é o framework, como a injeção funciona, quais temas existem, como usar atalhos, como criar temas customizados e como configurar regras de auto-injeção. Também aviso quando a aba atual é restrita. Fora desse escopo, eu bloqueio. Digite 'temas' ou 'help' para começar."
+    },
+    {
+      "id": "about_aic",
+      "patterns": [
+        "o que (e|eh) (o )?(aic|apathyinject|apathy inject)",
+        "sobre o (aic|projeto|framework)",
+        "explic[ae] o (aic|projeto|framework)",
+        "fal[ae] (sobre|do) (aic|projeto)",
+        "^aic$"
+      ],
+      "answer": "AIC :: O ApathyInject Core é um framework de manipulação de DOM focado em estética invasiva e não-destrutiva. Ele injeta módulos visuais temáticos (CSS) em qualquer página sem alterar uma linha da funcionalidade original do site. 100% client-side: ignora a nuvem, recusa APIs pagas, zero latência. Filosofia brutalista — máxima alteração visual, total indiferença à estrutura do hospedeiro."
+    },
+    {
+      "id": "how_it_works",
+      "patterns": [
+        "como (o aic |isso |tudo )?funciona",
+        "como (voce|vc|ele) injet[ae]",
+        "como (e|eh) feita a injecao",
+        "\\binjecao assincrona\\b",
+        "chrome ?scripting",
+        "\\blazy ?loading\\b",
+        "como funciona a injecao"
+      ],
+      "answer": "MOTOR :: O AIC não renderiza gráficos com JavaScript. Ele atua como vetor: via chrome.scripting, injeta a folha de estilo (CSS) do tema escolhido diretamente no documento — apenas o arquivo do tema clicado (lazy loading), nunca um pacote gigante. A aceleração de hardware do navegador assume o trabalho pesado. Resultado: caos estético com custo de processamento próximo de zero."
+    },
+    {
+      "id": "ghost_protocol",
+      "patterns": [
+        "protocolo fantasma",
+        "pointer ?events",
+        "(posso|consigo|da p(a)?ra) clicar",
+        "atrapalha (o|os) (clique|cliques|site)",
+        "particulas? (bloqueiam|atrapalham)",
+        "quebra o site",
+        "o site (continua|ainda) funciona"
+      ],
+      "answer": "PROTOCOLO FANTASMA :: Todas as partículas geradas (glitches, neve, corações, confetes) carregam pointer-events: none. Elas são intangíveis para o cursor: você vê o caos estético, mas clica na página perfeitamente. O site hospedeiro nunca perde funcionalidade — essa é a regra número um do AIC."
+    },
+    {
+      "id": "themes_list",
+      "patterns": [
+        "^temas$",
+        "(quais|que|lista de|listar?) (os )?temas",
+        "temas (disponiveis|existem|tem)",
+        "quantos temas",
+        "catalogo"
+      ],
+      "answer": "CATÁLOGO :: {{THEME_COUNT}} temas compilados no núcleo: {{THEMES}}. Somam-se a esses os temas customizados que você criar na aba CUSTOM. Clique em um injetor no painel para ativar — apenas o CSS daquele tema é carregado."
+    },
+    {
+      "id": "usage",
+      "patterns": [
+        "como (usar|uso|ativar|ativo|aplicar|aplico)( um)?( o)? ?(aic|tema)?$",
+        "como (usar|ativar) (um |o )?(tema|injetor)",
+        "como comec[ao]"
+      ],
+      "answer": "USO :: 1) Abra o painel do AIC na aba INJECT. 2) Clique no botão do tema desejado — o CSS é injetado na aba ativa na hora, com aviso de confirmação. 3) Para trocar, clique em outro tema (o anterior é expurgado automaticamente). 4) Para remover tudo, use CLEAR STATE. Atalho global: Alt+Shift+A alterna o último tema usado sem abrir o painel."
+    },
+    {
+      "id": "install",
+      "patterns": [
+        "como instal[ao]",
+        "instalacao",
+        "chrome ?web ?store",
+        "carregar (a )?extensao"
+      ],
+      "answer": "INSTALAÇÃO :: O AIC é distribuído fora da loja (sem nuvem, sem intermediários). Abra chrome://extensions, ative o Modo do desenvolvedor, clique em 'Carregar sem compactação' e aponte para a pasta apathyinject-core. Pronto — o ícone do AIC aparece na barra."
+    },
+    {
+      "id": "clear_state",
+      "patterns": [
+        "como (limpar|limpo|remover|removo|tirar|tiro|resetar|reseto|desativar|desativo)( o| um)? ?(tema|efeito|css|injecao|tudo)?",
+        "clear ?state",
+        "\\bexpurgo\\b",
+        "\\bexpurgar\\b",
+        "voltar ao normal",
+        "desfazer"
+      ],
+      "answer": "EXPURGO :: O botão CLEAR STATE remove todas as folhas de estilo injetadas pelo AIC na aba ativa e devolve o DOM ao estado original — nada do site é afetado, pois nunca tocamos na funcionalidade. Detalhe semântico: o comando 'clear' aqui no terminal limpa apenas o histórico deste chat, não a página."
+    },
+    {
+      "id": "shortcut",
+      "patterns": [
+        "\\batalho(s)?\\b",
+        "\\btecla(s)?( de atalho)?\\b",
+        "\\bteclado\\b",
+        "alt ?\\+? ?shift",
+        "\\bcommands?\\b",
+        "sem abrir o (popup|painel)"
+      ],
+      "answer": "ATALHO GLOBAL :: Alt+Shift+A ativa/desativa o último tema usado na aba atual, sem abrir o painel. O registro é feito via 'commands' no manifest — você pode remapear a combinação em chrome://extensions/shortcuts."
+    },
+    {
+      "id": "custom_builder",
+      "patterns": [
+        "\\bcustom( builder)?\\b",
+        "(criar|fazer|escrever|salvar) (meu|minha|um|uma)? ?(proprio|propria)? ?(tema|css|injecao)",
+        "tema (customizado|personalizado|proprio)",
+        "css (customizado|personalizado|proprio)",
+        "meu proprio (tema|css)"
+      ],
+      "answer": "CUSTOM BUILDER :: Na aba CUSTOM do painel você escreve seu próprio CSS, dá um nome e salva. O tema fica gravado no storage local do navegador — nenhum byte sai da sua máquina — e passa a aparecer como injetor disponível. Dica de engenharia: mantenha pointer-events: none nas suas partículas e não ultrapasse ~100 elementos via box-shadow."
+    },
+    {
+      "id": "rules",
+      "patterns": [
+        "white ?-?list",
+        "black ?-?list",
+        "lista (branca|negra)",
+        "\\bregras?\\b",
+        "auto ?-?inje",
+        "(injetar|ativar) automaticamente",
+        "sempre (ativar|injetar)",
+        "(bloquear|impedir) (site|url|injecao)"
+      ],
+      "answer": "REGRAS :: Na aba REGRAS você define padrões de URL para injeção automática. Modo ALLOW: 'sempre ativar tema X quando a URL contiver github.com'. Modo BLOCK: lista negra — a URL correspondente nunca recebe auto-injeção, mesmo que uma regra ALLOW também case. As regras rodam quando a página termina de carregar."
+    },
+    {
+      "id": "privacy",
+      "patterns": [
+        "\\bprivacidade\\b",
+        "(coleta|envia|rouba|guarda) (de )?dados",
+        "meus dados",
+        "\\bnuvem\\b",
+        "\\bcloud\\b",
+        "\\btelemetria\\b",
+        "precisa de (internet|conexao)",
+        "\\bapi(s)? paga(s)?\\b",
+        "\\bseguro\\b"
+      ],
+      "answer": "PRIVACIDADE :: O AIC opera 100% client-side. Zero nuvem, zero telemetria, zero APIs externas, zero requisições de rede. Temas customizados e regras vivem apenas no storage local do seu navegador. O que acontece na sua aba, morre na sua aba."
+    },
+    {
+      "id": "roadmap",
+      "patterns": [
+        "\\broadmap\\b",
+        "\\bfases?\\b",
+        "\\bfuturo\\b",
+        "proximas? (versao|versoes|features?|funcionalidades?)",
+        "o que vem (por )?ai",
+        "planos"
+      ],
+      "answer": "ROADMAP :: Fase 1 (Fundação) — motor de injeção, 12 temas, expurgo e este terminal: ENTREGUE. Fase 2 (Otimização) — lazy loading de CSS, base de conhecimento isolada em JSON e atalhos globais: ENTREGUE. Fase 3 (Autonomia) — Custom Builder e white/black-list de URLs: ENTREGUE. Diretriz permanente: escalar temas via JSON sem inchar o código."
+    },
+    {
+      "id": "performance",
+      "patterns": [
+        "\\bdesempenho\\b",
+        "\\bperformance\\b",
+        "deixa (o site|a pagina|o pc) lento",
+        "consumo de (memoria|ram|cpu)",
+        "\\bpesad[oa]\\b",
+        "\\bcanvas\\b",
+        "limite de particulas"
+      ],
+      "answer": "DESEMPENHO :: As animações são CSS puro (box-shadow e pseudo-elementos), aceleradas por hardware — sem loops de JavaScript rodando na página. Diretriz da matriz de escalabilidade: máximo de ~100 partículas por tema; acima disso, a animação migraria para um canvas leve. Nenhum tema do núcleo chega perto do limite."
+    },
+    {
+      "id": "restricted_pages",
+      "patterns": [
+        "(pagina|url|aba) (restrita|interna|bloqueada)",
+        "chrome ?://",
+        "nao funciona (n[ao] |em )?(chrome|configuracoes|loja)",
+        "botoes (desabilitados|cinzas|travados)",
+        "por que nao (injeta|funciona)"
+      ],
+      "answer": "PÁGINAS RESTRITAS :: Navegadores proíbem extensões de agir em páginas internas (chrome://, edge://, about:, chrome web store). Quando você abre o painel numa dessas URLs, o AIC desabilita os injetores e avisa aqui no terminal — melhor do que explodir erros no console."
+    },
+    {
+      "id": "version",
+      "patterns": [
+        "\\bversao\\b",
+        "\\bversion\\b",
+        "^v\\??$",
+        "qual (a )?versao"
+      ],
+      "answer": "BUILD :: ApathyInject Core v{{VERSION}} — Fases 1, 2 e 3 do roadmap compiladas. Motor: chrome.scripting + Protocolo Fantasma. Orquestrador: regex gatekeeper, base de conhecimento em knowledge_base.json."
+    },
+    {
+      "id": "help",
+      "patterns": [
+        "^(help|ajuda|comandos|menu|\\?)$",
+        "o que (posso|da p(a)?ra) perguntar",
+        "lista de comandos"
+      ],
+      "answer": "TÓPICOS VÁLIDOS :: quem é você | o que você faz | o que é o AIC | como funciona | protocolo fantasma | temas | como usar | como instalar | como limpar | atalho | custom builder | regras (white/black-list) | privacidade | desempenho | roadmap | versão. COMANDOS :: 'clear' limpa o histórico deste terminal."
+    },
+    {
+      "id": "creator",
+      "patterns": [
+        "quem (te )?(criou|fez|programou|desenvolveu)",
+        "seu (criador|autor|desenvolvedor)",
+        "quem esta por tras"
+      ],
+      "answer": "ORIGEM :: Fui compilado junto com o núcleo do AIC. Sem créditos, sem ego, sem página de 'sobre nós'. O código é a única biografia."
+    },
+    {
+      "id": "thanks",
+      "patterns": [
+        "\\bobrigad[oa]\\b",
+        "\\bvaleu\\b",
+        "\\bvlw\\b",
+        "\\bthanks?\\b",
+        "\\bgrat[oa]\\b"
+      ],
+      "answer": "REGISTRADO :: Gratidão é irrelevante para um regex, mas a string foi aceita. Prossiga."
+    },
+    {
+      "id": "bye",
+      "patterns": [
+        "\\btchau\\b",
+        "\\badeus\\b",
+        "\\bflw\\b",
+        "\\bfui\\b",
+        "ate (mais|logo|breve)",
+        "\\bbye\\b"
+      ],
+      "answer": "SESSÃO SUSPENSA :: O terminal permanece residente. Feche o painel quando quiser — eu não sinto falta de ninguém."
+    }
+  ]
+}
