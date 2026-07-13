@@ -1,7 +1,9 @@
 /* ═══ AIC :: inject-verao.css — VERÃO ═══
-   Sol girando no canto, lens flare e calor dourado.
-   Protocolo Fantasma: pointer-events none, GPU only. */
+   Protocolo 60fps: feixes de luz solar descendo do canto superior direito
+   (mix-blend-mode: overlay), sol girando, mormaço distorcendo o rodapé
+   (backdrop-filter: blur) e brilho dourado. Protocolo Fantasma: none. */
 
+/* Camada fundo — sol com raios girando no canto */
 html::before {
   content: "" !important;
   position: fixed !important;
@@ -9,7 +11,8 @@ html::before {
   width: 120vh; height: 120vh;
   border-radius: 50%;
   pointer-events: none !important;
-  z-index: 2147483646 !important;
+  z-index: 2147483644 !important;
+  will-change: transform;
   opacity: calc(0.55 * var(--aic-alpha, 1));
   background:
     conic-gradient(
@@ -28,33 +31,79 @@ html::before {
   animation: aic-verao-sol calc(24s / var(--aic-speed, 1)) linear infinite;
 }
 
+/* Camada rodapé — mormaço: distorção real do conteúdo atrás (heat haze) */
 html::after {
+  content: "" !important;
+  position: fixed !important;
+  bottom: 0; left: 0;
+  width: 100vw; height: 13vh;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  will-change: transform;
+  -webkit-backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(1.5px);
+  -webkit-mask-image: linear-gradient(to top, #000 30%, transparent);
+  mask-image: linear-gradient(to top, #000 30%, transparent);
+  background: linear-gradient(to top, rgba(255, 183, 3, 0.10), transparent 70%);
+  transform-origin: 50% 100%;
+  animation: aic-verao-mormaco calc(2.6s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+/* Assinatura — feixes de luz descendo do canto superior direito */
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  top: -20vh; right: -20vw;
+  width: 90vw; height: 130vh;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  mix-blend-mode: overlay;
+  opacity: calc(0.75 * var(--aic-alpha, 1));
+  background: repeating-linear-gradient(125deg,
+    transparent 0 40px,
+    rgba(255, 220, 120, 0.35) 40px 64px,
+    transparent 64px 130px,
+    rgba(255, 200, 80, 0.28) 130px 148px,
+    transparent 148px 230px);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 100% 0%, #000 25%, transparent 70%);
+  mask-image: radial-gradient(ellipse 90% 80% at 100% 0%, #000 25%, transparent 70%);
+  animation: aic-verao-feixes calc(5s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+/* Grade — calor dourado + mar no rodapé, lens flare */
+body::after {
   content: "" !important;
   position: fixed !important;
   inset: 0;
   pointer-events: none !important;
-  z-index: 2147483645 !important;
+  z-index: 2147483643 !important;
   opacity: calc(0.6 * var(--aic-alpha, 1));
   background:
     radial-gradient(circle 20vh at 88% 8%, rgba(255, 240, 160, 0.5), transparent 70%),
     radial-gradient(circle 4vh at 62% 34%, rgba(255, 220, 130, 0.28), transparent 70%),
     radial-gradient(circle 2.5vh at 46% 52%, rgba(255, 200, 100, 0.22), transparent 70%),
-    radial-gradient(circle 1.5vh at 32% 68%, rgba(255, 200, 100, 0.18), transparent 70%),
     linear-gradient(200deg, rgba(255, 183, 3, 0.10), transparent 55%),
-    radial-gradient(ellipse 120% 40% at 50% 112%, rgba(0, 150, 199, 0.16), transparent 70%);
-  animation: aic-verao-calor calc(5s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+    radial-gradient(ellipse 120% 40% at 50% 112%, rgba(0, 150, 199, 0.18), transparent 70%);
 }
 
 @keyframes aic-verao-sol {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from { transform: rotate3d(0, 0, 1, 0deg); }
+  to   { transform: rotate3d(0, 0, 1, 360deg); }
+}
+@keyframes aic-verao-mormaco {
+  from { transform: scale3d(1, 1, 1); }
+  to   { transform: scale3d(1.015, 1.06, 1); }
+}
+@keyframes aic-verao-feixes {
+  from { opacity: calc(0.55 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.9 * var(--aic-alpha, 1)); }
 }
 
-@keyframes aic-verao-calor {
-  from { opacity: calc(0.6 * var(--aic-alpha, 1)); }
-  to   { opacity: calc(0.42 * var(--aic-alpha, 1)); }
+/* Site escuro: feixes usam screen para brilhar sobre fundos pretos */
+@media (prefers-color-scheme: dark) {
+  body::before { mix-blend-mode: screen; opacity: calc(0.45 * var(--aic-alpha, 1)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html::before, html::after { animation: none !important; }
+  html::before, html::after, body::before, body::after { animation: none !important; }
 }

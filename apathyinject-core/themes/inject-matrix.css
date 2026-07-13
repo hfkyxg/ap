@@ -1,53 +1,93 @@
 /* ═══ AIC :: inject-matrix.css — MATRIX ═══
-   Chuva digital verde em três velocidades + tint de terminal.
-   Protocolo Fantasma: pointer-events none, GPU only. */
+   Protocolo 60fps: chuva digital em parallax (duas camadas translate3d em
+   velocidades diferentes), links do site ganham glow verde no hover —
+   integração real com o hospedeiro. Protocolo Fantasma: pointer-events none. */
 
+/* Camada fundo — colunas de código densas e fracas (longe) */
 html::before {
   content: "" !important;
   position: fixed !important;
-  inset: 0;
+  top: -760px; left: 0;
+  width: 100vw; height: calc(100vh + 1520px);
   pointer-events: none !important;
-  z-index: 2147483646 !important;
-  opacity: calc(0.65 * var(--aic-alpha, 1));
+  z-index: 2147483644 !important;
+  will-change: transform;
+  opacity: calc(0.5 * var(--aic-alpha, 1));
   background-image:
-    repeating-linear-gradient(to bottom,
-      rgba(0, 255, 65, 0.28) 0 14px, transparent 14px 90px),
-    repeating-linear-gradient(to bottom,
-      rgba(0, 255, 65, 0.18) 0 22px, transparent 22px 130px),
-    repeating-linear-gradient(to bottom,
-      rgba(140, 255, 170, 0.10) 0 8px, transparent 8px 70px);
-  background-size: 3px 180px, 3px 260px, 2px 140px;
-  background-position: 0 0, 0 0, 0 0;
-  background-repeat: repeat;
-  -webkit-mask-image: repeating-linear-gradient(to right,
-    #000 0 3px, transparent 3px 28px,
-    #000 28px 31px, transparent 31px 47px,
-    #000 47px 49px, transparent 49px 80px);
-  mask-image: repeating-linear-gradient(to right,
-    #000 0 3px, transparent 3px 28px,
-    #000 28px 31px, transparent 31px 47px,
-    #000 47px 49px, transparent 49px 80px);
-  animation: aic-matrix-rain calc(1.4s / var(--aic-speed, 1)) linear infinite;
+    repeating-linear-gradient(to bottom, rgba(0, 255, 65, 0.30) 0 14px, transparent 14px 90px),
+    repeating-linear-gradient(to bottom, rgba(0, 255, 65, 0.16) 0 22px, transparent 22px 130px);
+  background-size: 3px 360px, 3px 360px;
+  background-position: 0 0, 40px 180px;
+  -webkit-mask-image: repeating-linear-gradient(to right, #000 0 3px, transparent 3px 26px, #000 26px 29px, transparent 29px 52px);
+  mask-image: repeating-linear-gradient(to right, #000 0 3px, transparent 3px 26px, #000 26px 29px, transparent 29px 52px);
+  animation: aic-matrix-fundo calc(2.8s / var(--aic-speed, 1)) linear infinite;
 }
 
+/* Camada frente — colunas brilhantes e rápidas (perto), cabeça branca */
 html::after {
+  content: "" !important;
+  position: fixed !important;
+  top: -760px; left: 0;
+  width: 100vw; height: calc(100vh + 1520px);
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  will-change: transform;
+  opacity: calc(0.75 * var(--aic-alpha, 1));
+  background-image:
+    linear-gradient(to bottom, transparent 0 55%, rgba(0, 255, 65, 0.6) 78%, rgba(220, 255, 230, 0.9) 97%, transparent 100%),
+    linear-gradient(to bottom, transparent 0 60%, rgba(0, 255, 65, 0.45) 82%, rgba(200, 255, 215, 0.8) 98%, transparent 100%);
+  background-size: 3px 360px, 2px 360px;
+  background-position: 8vw 0, 63vw 200px;
+  background-repeat: repeat-y;
+  -webkit-mask-image: repeating-linear-gradient(to right, #000 0 3px, transparent 3px 9vw);
+  mask-image: repeating-linear-gradient(to right, #000 0 3px, transparent 3px 9vw);
+  filter: drop-shadow(0 0 4px rgba(0, 255, 65, 0.8));
+  animation: aic-matrix-frente calc(1.3s / var(--aic-speed, 1)) linear infinite;
+}
+
+/* Assinatura — links do site ganham phosphor glow no hover */
+a:hover, a:focus-visible {
+  color: #00ff41 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.9), 0 0 20px rgba(0, 255, 65, 0.4) !important;
+  transition: text-shadow 0.2s ease, color 0.2s ease !important;
+}
+
+/* Grade — tint de terminal + scanlines + vinheta */
+body::after {
   content: "" !important;
   position: fixed !important;
   inset: 0;
   pointer-events: none !important;
-  z-index: 2147483645 !important;
-  opacity: calc(0.6 * var(--aic-alpha, 1));
+  z-index: 2147483643 !important;
+  opacity: calc(0.7 * var(--aic-alpha, 1));
   background:
+    repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.10) 2px 3px),
     radial-gradient(ellipse 140% 90% at 50% 50%, transparent 55%, rgba(0, 20, 8, 0.55) 100%),
-    linear-gradient(rgba(0, 255, 65, 0.05), rgba(0, 255, 65, 0.05)),
-    repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.12) 2px 3px);
+    linear-gradient(rgba(0, 255, 65, 0.05), rgba(0, 255, 65, 0.05));
 }
 
-@keyframes aic-matrix-rain {
-  from { background-position: 0 0, 0 0, 0 0; }
-  to   { background-position: 0 180px, 0 260px, 0 140px; }
+/* Loop seamless: período do tile = 360px */
+@keyframes aic-matrix-fundo {
+  from { transform: translate3d(0, -360px, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+@keyframes aic-matrix-frente {
+  from { transform: translate3d(0, -360px, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+/* Site claro: contraste reforçado para o verde não sumir no branco */
+@media (prefers-color-scheme: light) {
+  html::before, html::after { filter: contrast(1.5) brightness(0.7); }
+  body::after {
+    opacity: calc(0.85 * var(--aic-alpha, 1));
+    background:
+      repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 40, 15, 0.08) 2px 3px),
+      radial-gradient(ellipse 140% 90% at 50% 50%, transparent 50%, rgba(0, 30, 12, 0.5) 100%),
+      linear-gradient(rgba(0, 90, 30, 0.08), rgba(0, 90, 30, 0.08));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html::before { animation: none !important; }
+  html::before, html::after, body::after { animation: none !important; }
 }

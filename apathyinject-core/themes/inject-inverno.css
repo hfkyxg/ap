@@ -1,61 +1,111 @@
 /* ═══ AIC :: inject-inverno.css — INVERNO ═══
-   Neve fina e lenta + geada azulada nas bordas da tela.
-   Protocolo Fantasma: pointer-events none, ≤100 partículas, GPU only. */
+   Protocolo 60fps: neve em parallax, geada cristalizada nas bordas,
+   fumaça fria exalando dos cantos inferiores e o site hospedeiro
+   perde 10% de saturação (backdrop-filter) para dar sensação de frio.
+   Protocolo Fantasma: pointer-events none em tudo. */
 
+/* Camada fundo — neve fina e lenta (longe) */
 html::before {
   content: "" !important;
   position: fixed !important;
-  top: 0; left: 0;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: transparent;
+  top: -560px; left: -10vw;
+  width: 120vw; height: calc(100vh + 1120px);
   pointer-events: none !important;
-  z-index: 2147483646 !important;
-  opacity: calc(0.85 * var(--aic-alpha, 1));
-  box-shadow:
-    2vw  -4vh  0 0 #eaf6ff,  8vw  -36vh 0 1px #ffffff,
-    14vw -14vh 0 0 #cfe9ff,  20vw -52vh 0 0 #eaf6ff,
-    26vw -8vh  0 1px #ffffff, 32vw -42vh 0 0 #cfe9ff,
-    38vw -24vh 0 0 #eaf6ff,  44vw -64vh 0 1px #ffffff,
-    50vw -10vh 0 0 #cfe9ff,  56vw -46vh 0 0 #eaf6ff,
-    62vw -28vh 0 1px #ffffff, 68vw -70vh 0 0 #cfe9ff,
-    74vw -16vh 0 0 #eaf6ff,  80vw -50vh 0 1px #ffffff,
-    86vw -38vh 0 0 #cfe9ff,  92vw -76vh 0 0 #eaf6ff,
-    98vw -20vh 0 1px #ffffff, 5vw  -82vh 0 0 #cfe9ff,
-    35vw -88vh 0 0 #eaf6ff,  65vw -92vh 0 1px #ffffff,
-    95vw -86vh 0 0 #cfe9ff,  23vw -68vh 0 0 #eaf6ff,
-    53vw -78vh 0 1px #ffffff, 83vw -60vh 0 0 #cfe9ff;
-  animation: aic-inverno-neve calc(16s / var(--aic-speed, 1)) linear infinite;
+  z-index: 2147483644 !important;
+  will-change: transform;
+  opacity: calc(0.6 * var(--aic-alpha, 1));
+  background-image:
+    radial-gradient(circle at 30% 40%, rgba(234, 246, 255, 0.9) 1.2px, transparent 2.2px),
+    radial-gradient(circle at 70% 20%, rgba(207, 233, 255, 0.75) 1px, transparent 2px),
+    radial-gradient(circle at 50% 75%, rgba(255, 255, 255, 0.65) 0.8px, transparent 1.6px);
+  background-size: 100px 180px, 140px 180px, 80px 180px;
+  animation: aic-inverno-fundo calc(17s / var(--aic-speed, 1)) linear infinite;
 }
 
+/* Camada frente — flocos cristal grandes, mais rápidos, desfocados */
 html::after {
+  content: "❄     ❅       ❆     ❄    ❅ \A       ❆      ❄     ❅      ❆ \A   ❅       ❄      ❆      ❄ \A      ❄     ❆       ❅    ❄ \A ❄     ❅       ❆     ❄    ❅ \A       ❆      ❄     ❅      ❆ \A   ❅       ❄      ❆      ❄ \A      ❄     ❆       ❅    ❄ " !important;
+  position: fixed !important;
+  top: 0; left: -5vw;
+  width: 110vw; height: 200vh;
+  white-space: pre;
+  line-height: 25vh;
+  font-size: 18px;
+  color: rgba(234, 246, 255, 0.95);
+  text-shadow: 0 0 5px rgba(160, 210, 255, 0.8);
+  letter-spacing: 5vw;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  will-change: transform;
+  filter: blur(0.6px);
+  opacity: calc(0.85 * var(--aic-alpha, 1));
+  animation: aic-inverno-frente calc(11s / var(--aic-speed, 1)) linear infinite;
+}
+
+/* Assinatura — fumaça fria exalando dos cantos inferiores */
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  bottom: 0; left: -15vw;
+  width: 130vw; height: 34vh;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  will-change: transform;
+  mix-blend-mode: screen;
+  opacity: calc(0.5 * var(--aic-alpha, 1));
+  background:
+    radial-gradient(ellipse 35% 70% at 8% 100%, rgba(190, 225, 255, 0.4), transparent 70%),
+    radial-gradient(ellipse 35% 65% at 92% 100%, rgba(180, 220, 255, 0.38), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 50% 105%, rgba(200, 230, 255, 0.22), transparent 75%);
+  animation: aic-inverno-fumaca calc(9s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
+/* Grade — geada nas bordas + frio: -10% de saturação no site hospedeiro */
+body::after {
   content: "" !important;
   position: fixed !important;
   inset: 0;
   pointer-events: none !important;
-  z-index: 2147483645 !important;
-  opacity: calc(0.65 * var(--aic-alpha, 1));
+  z-index: 2147483643 !important;
+  opacity: calc(0.8 * var(--aic-alpha, 1));
+  -webkit-backdrop-filter: saturate(0.9);
+  backdrop-filter: saturate(0.9);
   background:
-    radial-gradient(ellipse 55% 45% at 0% 0%, rgba(200, 230, 255, 0.30), transparent 60%),
-    radial-gradient(ellipse 55% 45% at 100% 0%, rgba(200, 230, 255, 0.28), transparent 60%),
-    radial-gradient(ellipse 55% 45% at 0% 100%, rgba(180, 215, 250, 0.30), transparent 60%),
-    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(180, 215, 250, 0.28), transparent 60%),
-    linear-gradient(rgba(162, 210, 255, 0.07), rgba(162, 210, 255, 0.07));
-  animation: aic-inverno-geada calc(9s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+    radial-gradient(ellipse 55% 45% at 0% 0%, rgba(200, 230, 255, 0.32), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 100% 0%, rgba(200, 230, 255, 0.3), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 0% 100%, rgba(180, 215, 250, 0.32), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(180, 215, 250, 0.3), transparent 60%),
+    linear-gradient(rgba(162, 210, 255, 0.08), rgba(162, 210, 255, 0.08));
 }
 
-@keyframes aic-inverno-neve {
-  0%   { transform: translateY(0) translateX(0); }
-  33%  { transform: translateY(42vh) translateX(1.2vw); }
-  66%  { transform: translateY(84vh) translateX(-1.2vw); }
-  100% { transform: translateY(125vh) translateX(0); }
+/* Parallax: fundo desloca 540px (LCM), frente desloca 100vh com deriva */
+@keyframes aic-inverno-fundo {
+  from { transform: translate3d(0, -540px, 0); }
+  50%  { transform: translate3d(1vw, -270px, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+@keyframes aic-inverno-frente {
+  0%   { transform: translate3d(0, -100vh, 0); }
+  33%  { transform: translate3d(1.4vw, -66vh, 0); }
+  66%  { transform: translate3d(-1.2vw, -33vh, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes aic-inverno-fumaca {
+  from { transform: translate3d(-4vw, 1vh, 0); }
+  to   { transform: translate3d(4vw, -2vh, 0); }
 }
 
-@keyframes aic-inverno-geada {
-  from { opacity: calc(0.65 * var(--aic-alpha, 1)); }
-  to   { opacity: calc(0.5 * var(--aic-alpha, 1)); }
+/* Site claro: flocos ganham contorno azul-aço para contraste */
+@media (prefers-color-scheme: light) {
+  html::after {
+    color: rgba(150, 195, 240, 1);
+    text-shadow: 0 0 4px rgba(70, 120, 190, 0.9);
+  }
+  html::before { filter: contrast(1.35) brightness(0.8); }
+  body::before { mix-blend-mode: multiply; opacity: calc(0.28 * var(--aic-alpha, 1)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html::before, html::after { animation: none !important; }
+  html::before, html::after, body::before, body::after { animation: none !important; }
 }

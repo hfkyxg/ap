@@ -1,51 +1,85 @@
 /* ═══ AIC :: inject-primavera.css — PRIMAVERA ═══
-   Pétalas de cerejeira à deriva + luz suave de jardim.
-   Protocolo Fantasma: pointer-events none, GPU only. */
+   Protocolo 60fps: pétalas de cerejeira (SVG data-URI) caindo na diagonal
+   em parallax — camada frontal com blur(2px) cria profundidade de campo.
+   Harmonia: tom de jardim ultra-suave via mix-blend-mode: overlay.
+   Protocolo Fantasma: pointer-events none em tudo. */
 
+/* Camada fundo — pétalas SVG pequenas (longe), diagonal suave */
 html::before {
-  content: "🌸    🌺      🌸        🌼    🌸 \A       🌼    🌸      🌺        🌸 \A   🌸        🌸    🌼      🌺 \A 🌺      🌸        🌸    🌼 \A 🌸    🌺      🌸        🌼    🌸 \A       🌼    🌸      🌺        🌸 \A   🌸        🌸    🌼      🌺 \A 🌺      🌸        🌸    🌼 " !important;
+  content: "" !important;
   position: fixed !important;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 200vh;
+  top: -320px; left: -240px;
+  width: calc(100vw + 480px); height: calc(100vh + 640px);
+  pointer-events: none !important;
+  z-index: 2147483644 !important;
+  will-change: transform;
+  opacity: calc(0.65 * var(--aic-alpha, 1));
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'%3E%3Cpath d='M12 2c4 4 5 9 0 14c-5-5-4-10 0-14z' fill='%23ffb7c5' fill-opacity='0.9' transform='rotate(35 12 12)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='10' height='10'%3E%3Cpath d='M12 2c4 4 5 9 0 14c-5-5-4-10 0-14z' fill='%23ffcad4' fill-opacity='0.8' transform='rotate(-20 12 12)'/%3E%3C/svg%3E");
+  background-size: 120px 160px, 90px 160px;
+  background-position: 0 0, 45px 80px;
+  animation: aic-prima-fundo calc(13s / var(--aic-speed, 1)) linear infinite;
+}
+
+/* Camada frente — pétalas e flores grandes, rápidas, desfocadas (perto) */
+html::after {
+  content: "🌸    ✿      🌸        ❀    🌸 \A       🌼    🌸      ✿        🌸 \A   🌸        🌸    ❀      ✿ \A ✿      🌸        🌸    🌼 \A 🌸    ✿      🌸        ❀    🌸 \A       🌼    🌸      ✿        🌸 \A   🌸        🌸    ❀      ✿ \A ✿      🌸        🌸    🌼 " !important;
+  position: fixed !important;
+  top: 0; left: -5vw;
+  width: 110vw; height: 200vh;
   white-space: pre;
   line-height: 25vh;
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 4vw;
   text-indent: 1vw;
   font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
   pointer-events: none !important;
   z-index: 2147483646 !important;
+  will-change: transform;
+  filter: blur(2px);
   opacity: calc(0.75 * var(--aic-alpha, 1));
-  animation: aic-prima-petala calc(18s / var(--aic-speed, 1)) linear infinite;
+  animation: aic-prima-frente calc(10s / var(--aic-speed, 1)) linear infinite;
 }
 
-html::after {
+/* Grade — luz de jardim: dourado no alto, verde no chão, rosa no ar */
+body::after {
   content: "" !important;
   position: fixed !important;
   inset: 0;
   pointer-events: none !important;
-  z-index: 2147483645 !important;
-  opacity: calc(0.5 * var(--aic-alpha, 1));
+  z-index: 2147483643 !important;
+  mix-blend-mode: overlay;
+  opacity: calc(0.9 * var(--aic-alpha, 1));
   background:
-    radial-gradient(ellipse 70% 50% at 85% -5%, rgba(255, 236, 179, 0.30), transparent 65%),
-    radial-gradient(ellipse 100% 45% at 50% 110%, rgba(140, 200, 120, 0.22), transparent 70%),
-    linear-gradient(rgba(255, 175, 204, 0.06), rgba(255, 175, 204, 0.06));
+    radial-gradient(ellipse 70% 50% at 85% -5%, rgba(255, 236, 179, 0.45), transparent 65%),
+    radial-gradient(ellipse 100% 45% at 50% 110%, rgba(140, 200, 120, 0.35), transparent 70%),
+    linear-gradient(rgba(255, 175, 204, 0.09), rgba(255, 175, 204, 0.09));
   animation: aic-prima-brisa calc(7s / var(--aic-speed, 1)) ease-in-out infinite alternate;
 }
 
-@keyframes aic-prima-petala {
-  0%   { transform: translateY(-100vh) translateX(0); }
-  30%  { transform: translateY(-68vh) translateX(2.5vw); }
-  60%  { transform: translateY(-38vh) translateX(-2vw); }
-  100% { transform: translateY(0) translateX(0); }
+/* Diagonal seamless: deslocamento = período do tile (120×160px) */
+@keyframes aic-prima-fundo {
+  from { transform: translate3d(-120px, -160px, 0) rotate3d(1, 1, 0, 0deg); }
+  to   { transform: translate3d(0, 0, 0) rotate3d(1, 1, 0, 8deg); }
+}
+@keyframes aic-prima-frente {
+  0%   { transform: translate3d(0, -100vh, 0); }
+  30%  { transform: translate3d(2.5vw, -68vh, 0); }
+  65%  { transform: translate3d(-2vw, -35vh, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes aic-prima-brisa {
+  from { opacity: calc(0.9 * var(--aic-alpha, 1)); }
+  to   { opacity: calc(0.6 * var(--aic-alpha, 1)); }
 }
 
-@keyframes aic-prima-brisa {
-  from { opacity: calc(0.5 * var(--aic-alpha, 1)); }
-  to   { opacity: calc(0.34 * var(--aic-alpha, 1)); }
+/* Site claro: pétalas mais rosadas para não desbotar no branco */
+@media (prefers-color-scheme: light) {
+  html::before { filter: saturate(1.4); }
+  html::after { filter: blur(2px) saturate(1.2); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html::before, html::after { animation: none !important; }
+  html::before, html::after, body::after { animation: none !important; }
 }
