@@ -42,26 +42,27 @@ html::after {
   animation: aic-hallo-morcegos calc(9s / var(--aic-speed, 1)) linear infinite;
 }
 
-/* Assinatura — névoa rasteira deslizando na base (screen: some no escuro,
-   aparece no claro de forma orgânica) */
+/* Assinatura — abóboras brilhando no chão + fantasma e caveira de guarda */
 body::before {
-  content: "" !important;
+  content: "🎃       👻       💀       🎃" !important;
   position: fixed !important;
-  bottom: 0; left: -20vw;
-  width: 140vw; height: 30vh;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding-bottom: 6px;
+  white-space: pre;
+  font-size: 32px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
   pointer-events: none !important;
   z-index: 2147483645 !important;
-  will-change: transform;
-  mix-blend-mode: screen;
-  opacity: calc(0.6 * var(--aic-alpha, 1));
-  background:
-    radial-gradient(ellipse 45% 60% at 25% 100%, rgba(150, 90, 200, 0.35), transparent 70%),
-    radial-gradient(ellipse 50% 55% at 65% 100%, rgba(110, 60, 160, 0.3), transparent 70%),
-    radial-gradient(ellipse 40% 50% at 90% 100%, rgba(160, 100, 210, 0.28), transparent 70%);
-  animation: aic-hallo-nevoa calc(11s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+  opacity: calc(0.95 * var(--aic-alpha, 1));
+  filter: drop-shadow(0 0 10px rgba(255, 106, 0, 0.7)) drop-shadow(0 0 26px rgba(255, 60, 0, 0.35));
+  animation: aic-hallo-brilho calc(2.2s / var(--aic-speed, 1)) ease-in-out infinite alternate;
 }
 
-/* Grade — vinheta roxa + relâmpago (flash de tempestade) */
+/* Grade — vinheta roxa + névoa rasteira + relâmpago (flash de tempestade) */
 body::after {
   content: "" !important;
   position: fixed !important;
@@ -72,6 +73,8 @@ body::after {
   background:
     radial-gradient(ellipse 90% 60% at 15% -10%, rgba(90, 20, 130, 0.38), transparent 70%),
     radial-gradient(ellipse 90% 60% at 85% -10%, rgba(60, 10, 90, 0.38), transparent 70%),
+    radial-gradient(ellipse 45% 22% at 25% 102%, rgba(150, 90, 200, 0.3), transparent 70%),
+    radial-gradient(ellipse 50% 20% at 70% 102%, rgba(110, 60, 160, 0.26), transparent 70%),
     radial-gradient(ellipse 130% 55% at 50% 112%, rgba(255, 100, 0, 0.22), transparent 65%),
     radial-gradient(ellipse 150% 100% at 50% 50%, transparent 58%, rgba(15, 0, 25, 0.55) 100%);
   animation: aic-hallo-relampago calc(7s / var(--aic-speed, 1)) step-end infinite;
@@ -91,9 +94,16 @@ body::after {
   75%  { transform: translate3d(72vw, -5vh, 0); }
   100% { transform: translate3d(121vw, 0, 0); }
 }
-@keyframes aic-hallo-nevoa {
-  from { transform: translate3d(-5vw, 0, 0); }
-  to   { transform: translate3d(5vw, 0, 0); }
+/* Brilho pulsante das abóboras (filter roda no compositor) */
+@keyframes aic-hallo-brilho {
+  from {
+    filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.55)) drop-shadow(0 0 20px rgba(255, 60, 0, 0.25));
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    filter: drop-shadow(0 0 14px rgba(255, 150, 0, 0.85)) drop-shadow(0 0 34px rgba(255, 90, 0, 0.45));
+    transform: translate3d(0, -5px, 0);
+  }
 }
 @keyframes aic-hallo-relampago {
   0%, 93%, 96%, 100% { opacity: calc(0.75 * var(--aic-alpha, 1)); }
@@ -101,9 +111,8 @@ body::after {
   95%                { opacity: calc(0.6 * var(--aic-alpha, 1)); }
 }
 
-/* Site claro: névoa multiplica no lugar de screen para continuar visível */
+/* Site claro: vinheta reforçada para o clima sombrio permanecer */
 @media (prefers-color-scheme: light) {
-  body::before { mix-blend-mode: multiply; opacity: calc(0.45 * var(--aic-alpha, 1)); }
   body::after { opacity: calc(0.9 * var(--aic-alpha, 1)); }
 }
 

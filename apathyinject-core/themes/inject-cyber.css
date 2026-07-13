@@ -66,6 +66,15 @@ body::after {
   z-index: 2147483643 !important;
   opacity: calc(0.85 * var(--aic-alpha, 1));
   background:
+    /* Brackets HUD nos 4 cantos */
+    linear-gradient(rgba(0, 229, 255, 0.85) 0 2px, transparent 2px) 8px 8px / 20px 2px no-repeat,
+    linear-gradient(to right, rgba(0, 229, 255, 0.85) 0 2px, transparent 2px) 8px 8px / 2px 20px no-repeat,
+    linear-gradient(rgba(0, 229, 255, 0.85) 0 2px, transparent 2px) calc(100% - 8px) 8px / 20px 2px no-repeat,
+    linear-gradient(to left, rgba(0, 229, 255, 0.85) 0 2px, transparent 2px) calc(100% - 8px) 8px / 2px 20px no-repeat,
+    linear-gradient(rgba(255, 0, 230, 0.8) 0 2px, transparent 2px) 8px calc(100% - 8px) / 20px 2px no-repeat,
+    linear-gradient(to right, rgba(255, 0, 230, 0.8) 0 2px, transparent 2px) 8px calc(100% - 8px) / 2px 20px no-repeat,
+    linear-gradient(rgba(255, 0, 230, 0.8) 0 2px, transparent 2px) calc(100% - 8px) calc(100% - 8px) / 20px 2px no-repeat,
+    linear-gradient(to left, rgba(255, 0, 230, 0.8) 0 2px, transparent 2px) calc(100% - 8px) calc(100% - 8px) / 2px 20px no-repeat,
     repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0, 229, 255, 0.04) 3px 4px),
     radial-gradient(ellipse 70% 55% at 0% 100%, rgba(255, 0, 230, 0.22), transparent 65%),
     radial-gradient(ellipse 70% 55% at 100% 0%, rgba(0, 229, 255, 0.22), transparent 65%),

@@ -52,6 +52,25 @@ a:hover, a:focus-visible {
   transition: text-shadow 0.2s ease, color 0.2s ease !important;
 }
 
+/* Assinatura — a escolha de Neo, no canto */
+body::before {
+  content: "💊" !important;
+  position: fixed !important;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 18px 14px 0;
+  font-size: 24px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.9 * var(--aic-alpha, 1));
+  filter: drop-shadow(0 0 8px rgba(255, 30, 30, 0.7));
+  animation: aic-matrix-pilula calc(3s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
 /* Grade — tint de terminal + scanlines + vinheta */
 body::after {
   content: "" !important;
@@ -75,6 +94,10 @@ body::after {
   from { transform: translate3d(0, -360px, 0); }
   to   { transform: translate3d(0, 0, 0); }
 }
+@keyframes aic-matrix-pilula {
+  from { transform: translate3d(0, 0, 0) rotate3d(0, 0, 1, -8deg); }
+  to   { transform: translate3d(0, -6px, 0) rotate3d(0, 0, 1, 8deg); }
+}
 
 /* Site claro: contraste reforçado para o verde não sumir no branco */
 @media (prefers-color-scheme: light) {
@@ -89,7 +112,7 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html::before, html::after, body::after { animation: none !important; }
+  html::before, html::after, body::before, body::after { animation: none !important; }
 }
 
 /* ── Sutileza padrão: presença discreta; perfis eco/brutal continuam valendo ── */

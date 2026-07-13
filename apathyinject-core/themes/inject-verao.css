@@ -70,14 +70,23 @@ body::before {
   animation: aic-verao-feixes calc(5s / var(--aic-speed, 1)) ease-in-out infinite alternate;
 }
 
-/* Grade — calor dourado + mar no rodapé, lens flare */
+/* Grade — calor dourado, lens flare + cantinho de praia no rodapé */
 body::after {
-  content: "" !important;
+  content: "⛱                                                            🌴" !important;
   position: fixed !important;
   inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 14px 6px;
+  white-space: pre;
+  font-size: 30px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  filter: drop-shadow(0 2px 8px rgba(120, 60, 0, 0.35));
   pointer-events: none !important;
   z-index: 2147483643 !important;
-  opacity: calc(0.6 * var(--aic-alpha, 1));
+  opacity: calc(0.85 * var(--aic-alpha, 1));
   background:
     radial-gradient(circle 20vh at 88% 8%, rgba(255, 240, 160, 0.5), transparent 70%),
     radial-gradient(circle 4vh at 62% 34%, rgba(255, 220, 130, 0.28), transparent 70%),

@@ -53,6 +53,26 @@ html::after {
   animation: aic-love-frente calc(12s / var(--aic-speed, 1)) linear infinite;
 }
 
+/* Assinatura — carta de amor e anel guardando os cantos */
+body::before {
+  content: "💌                                                            💍" !important;
+  position: fixed !important;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px 16px 0;
+  white-space: pre;
+  font-size: 26px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.9 * var(--aic-alpha, 1));
+  filter: drop-shadow(0 0 8px rgba(255, 92, 138, 0.5));
+  animation: aic-love-mascote calc(3s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
 /* Grade — rubor rosa mesclando com o fundo do site */
 body::after {
   content: "" !important;
@@ -85,6 +105,10 @@ body::after {
   0%, 100% { opacity: calc(0.9 * var(--aic-alpha, 1)); }
   50%      { opacity: calc(0.6 * var(--aic-alpha, 1)); }
 }
+@keyframes aic-love-mascote {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -6px, 0); }
+}
 
 /* Site claro: rosa mais saturado para não desbotar */
 @media (prefers-color-scheme: light) {
@@ -93,7 +117,7 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html::before, html::after, body::after { animation: none !important; }
+  html::before, html::after, body::before, body::after { animation: none !important; }
 }
 
 /* ── Sutileza padrão: presença discreta; perfis eco/brutal continuam valendo ── */

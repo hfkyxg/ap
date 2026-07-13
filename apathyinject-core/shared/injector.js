@@ -84,6 +84,21 @@
     await chrome.storage.local.set({ aic_rules: rules });
   }
 
+  // Favoritos: IDs de temas marcados com estrela (ordenam primeiro no grid).
+  async function getFavorites() {
+    var data = await chrome.storage.local.get("aic_favorites");
+    return data.aic_favorites || [];
+  }
+
+  async function toggleFavorite(themeId) {
+    var favorites = await getFavorites();
+    var index = favorites.indexOf(themeId);
+    if (index === -1) favorites.push(themeId);
+    else favorites.splice(index, 1);
+    await chrome.storage.local.set({ aic_favorites: favorites });
+    return favorites;
+  }
+
   async function getIntensity() {
     var data = await chrome.storage.local.get("aic_intensity");
     return data.aic_intensity || "padrao";
@@ -241,6 +256,8 @@
     saveCustomThemes: saveCustomThemes,
     getRules: getRules,
     saveRules: saveRules,
+    getFavorites: getFavorites,
+    toggleFavorite: toggleFavorite,
     getIntensity: getIntensity,
     setIntensity: setIntensity,
     getLastTheme: getLastTheme,

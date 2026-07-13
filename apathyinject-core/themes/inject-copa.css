@@ -47,20 +47,28 @@ html::after {
   animation: aic-copa-frente calc(9s / var(--aic-speed, 1)) linear infinite;
 }
 
-/* Assinatura — bandeiras translúcidas nas laterais (torcida) */
+/* Assinatura — bandeiras laterais + troféu mascote no canto */
 body::before {
-  content: "" !important;
+  content: "🏆" !important;
   position: fixed !important;
   inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 16px 12px 0;
+  font-size: 34px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
   pointer-events: none !important;
   z-index: 2147483645 !important;
-  opacity: calc(0.5 * var(--aic-alpha, 1));
+  opacity: calc(0.85 * var(--aic-alpha, 1));
   background:
     linear-gradient(to bottom, rgba(0, 156, 59, 0.30), rgba(255, 223, 0, 0.26), rgba(0, 39, 118, 0.22)) left / 72px 100% no-repeat,
     linear-gradient(to bottom, rgba(0, 39, 118, 0.22), rgba(255, 223, 0, 0.26), rgba(0, 156, 59, 0.30)) right / 72px 100% no-repeat;
   -webkit-mask-image: linear-gradient(to right, #000 0 72px, transparent 72px calc(100% - 72px), #000 calc(100% - 72px));
   mask-image: linear-gradient(to right, #000 0 72px, transparent 72px calc(100% - 72px), #000 calc(100% - 72px));
-  animation: aic-copa-torcida calc(3s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+  animation: aic-copa-mascote calc(2.8s / var(--aic-speed, 1)) ease-in-out infinite alternate;
 }
 
 /* Grade — harmonia orgânica com o fundo do site via mix-blend-mode */
@@ -89,9 +97,9 @@ body::after {
   66%  { transform: translate3d(-1.4vw, -33vh, 0) rotate3d(1, 1, 0, -2deg); }
   100% { transform: translate3d(0, 0, 0) rotate3d(1, 1, 0, 0deg); }
 }
-@keyframes aic-copa-torcida {
-  from { opacity: calc(0.38 * var(--aic-alpha, 1)); }
-  to   { opacity: calc(0.6 * var(--aic-alpha, 1)); }
+@keyframes aic-copa-mascote {
+  from { transform: translate3d(0, 0, 0); opacity: calc(0.7 * var(--aic-alpha, 1)); }
+  to   { transform: translate3d(0, -7px, 0); opacity: calc(0.95 * var(--aic-alpha, 1)); }
 }
 
 /* Site claro: reforça o verde para dar contraste */

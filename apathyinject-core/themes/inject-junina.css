@@ -61,14 +61,23 @@ body::before {
   animation: aic-junina-vento calc(3.2s / var(--aic-speed, 1)) ease-in-out infinite alternate;
 }
 
-/* Grade — noite estrelada em cima + brasa da fogueira embaixo */
+/* Grade — noite estrelada + brasa + mascotes do arraiá no rodapé */
 body::after {
-  content: "" !important;
+  content: "🪗          🌽          🔥          🎪" !important;
   position: fixed !important;
   inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding-bottom: 8px;
+  white-space: pre;
+  font-size: 28px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  filter: drop-shadow(0 0 9px rgba(255, 154, 0, 0.55));
   pointer-events: none !important;
   z-index: 2147483643 !important;
-  opacity: calc(0.8 * var(--aic-alpha, 1));
+  opacity: calc(0.85 * var(--aic-alpha, 1));
   background:
     radial-gradient(circle 1.5px at 12vw 8vh, rgba(255,255,255,0.8) 50%, transparent),
     radial-gradient(circle 1px at 34vw 16vh, rgba(255,255,255,0.6) 50%, transparent),
@@ -95,8 +104,8 @@ body::after {
   to   { transform: rotate3d(0, 0, 1, 2.2deg); }
 }
 @keyframes aic-junina-brasa {
-  from { opacity: calc(0.7 * var(--aic-alpha, 1)); }
-  to   { opacity: calc(0.92 * var(--aic-alpha, 1)); }
+  from { opacity: calc(0.7 * var(--aic-alpha, 1)); transform: translate3d(0, 0, 0); }
+  to   { opacity: calc(0.92 * var(--aic-alpha, 1)); transform: translate3d(0, -4px, 0); }
 }
 
 /* Site claro: noite mais leve, fogueira mais visível */

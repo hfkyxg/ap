@@ -103,13 +103,25 @@
   async function renderThemeGrid() {
     var grid = $("#theme-grid");
     grid.innerHTML = "";
-    var active = state.tab && !state.restricted
-      ? await AICInjector.getTabState(state.tab.id)
-      : null;
+    var results = await Promise.all([
+      state.tab && !state.restricted ? AICInjector.getTabState(state.tab.id) : null,
+      AICInjector.getFavorites(),
+    ]);
+    var active = results[0];
+    var favorites = results[1];
 
-    state.config.themes.forEach(function (theme) {
+    // Favoritos primeiro, mantendo a ordem do catálogo dentro de cada grupo.
+    var ordered = state.config.themes.slice().sort(function (a, b) {
+      var favA = favorites.indexOf(a.id) !== -1 ? 0 : 1;
+      var favB = favorites.indexOf(b.id) !== -1 ? 0 : 1;
+      return favA - favB;
+    });
+    state.gridOrder = ordered;
+
+    ordered.forEach(function (theme) {
+      var isFav = favorites.indexOf(theme.id) !== -1;
       var btn = document.createElement("button");
-      btn.className = "theme-btn";
+      btn.className = "theme-btn" + (isFav ? " faved" : "");
       btn.style.setProperty("--accent", theme.accent);
       btn.title = theme.description || theme.name;
       btn.disabled = state.restricted;
@@ -122,6 +134,20 @@
       var name = document.createElement("span");
       name.className = "theme-name";
       name.textContent = theme.name;
+
+      // Estrela de favorito: clique não injeta, só marca/desmarca.
+      var star = document.createElement("span");
+      star.className = "fav-star" + (isFav ? " faved" : "");
+      star.textContent = isFav ? "★" : "☆";
+      star.title = isFav ? "Remover dos favoritos" : "Favoritar tema";
+      star.addEventListener("click", function (event) {
+        event.stopPropagation();
+        AICInjector.toggleFavorite(theme.id).then(function () {
+          renderThemeGrid();
+        });
+      });
+
+      btn.appendChild(star);
       btn.appendChild(emoji);
       btn.appendChild(name);
       btn.addEventListener("click", function () {
@@ -546,7 +572,8 @@
         buttons[(focused - 1 + buttons.length) % buttons.length].focus();
       } else if (event.key >= "1" && event.key <= "9") {
         var idx = parseInt(event.key, 10) - 1;
-        var theme = state.config.themes[idx];
+        var order = state.gridOrder || state.config.themes;
+        var theme = order[idx];
         if (theme) injectTheme({ type: "builtin", id: theme.id });
       } else if (event.key === "r" || event.key === "R") {
         $("#btn-random").click();

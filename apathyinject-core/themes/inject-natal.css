@@ -48,27 +48,30 @@ html::after {
   animation: aic-natal-neve-frente calc(8s / var(--aic-speed, 1)) linear infinite;
 }
 
-/* Assinatura — varal de luzes piscando + Papai Noel no canto */
+/* Assinatura — varal de luzes no topo + mascotes natalinos no rodapé */
 body::before {
-  content: "🎅" !important;
+  content: "🎄      🎁      ⛄      🦌      🎅" !important;
   position: fixed !important;
-  top: 0; left: 0;
-  width: 100vw; height: 60px;
-  padding-top: 26px;
-  text-align: right;
-  font-size: 30px;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding-bottom: 8px;
+  white-space: pre;
+  font-size: 27px;
   line-height: 1;
   font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
   pointer-events: none !important;
   z-index: 2147483645 !important;
   opacity: calc(0.95 * var(--aic-alpha, 1));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
   background:
     linear-gradient(rgba(90, 60, 30, 0.55) 0 2px, transparent 2px) 0 8px / 100% 3px no-repeat,
     radial-gradient(circle 5px at 10px 14px, #ff4d4d 45%, transparent 65%) 0 0 / 88px 30px repeat-x,
     radial-gradient(circle 5px at 32px 20px, #ffdf5e 45%, transparent 65%) 0 0 / 88px 30px repeat-x,
     radial-gradient(circle 5px at 54px 12px, #4dff88 45%, transparent 65%) 0 0 / 88px 30px repeat-x,
     radial-gradient(circle 5px at 76px 22px, #4db8ff 45%, transparent 65%) 0 0 / 88px 30px repeat-x;
-  animation: aic-natal-luzes calc(1.6s / var(--aic-speed, 1)) steps(2, jump-none) infinite;
+  animation: aic-natal-luzes calc(2.4s / var(--aic-speed, 1)) ease-in-out infinite alternate;
 }
 
 /* Grade — noite fria em cima, brasa quente embaixo, mescla orgânica */
@@ -99,8 +102,8 @@ body::after {
   100% { transform: translate3d(0, 0, 0); }
 }
 @keyframes aic-natal-luzes {
-  0%, 100% { opacity: calc(0.95 * var(--aic-alpha, 1)); }
-  50%      { opacity: calc(0.55 * var(--aic-alpha, 1)); }
+  from { opacity: calc(0.95 * var(--aic-alpha, 1)); transform: translate3d(0, 0, 0); }
+  to   { opacity: calc(0.7 * var(--aic-alpha, 1)); transform: translate3d(0, -5px, 0); }
 }
 
 /* Site claro: neve ganha contorno azulado para não sumir no branco */

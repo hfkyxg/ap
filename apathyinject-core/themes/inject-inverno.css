@@ -48,22 +48,24 @@ html::after {
   animation: aic-inverno-frente calc(11s / var(--aic-speed, 1)) linear infinite;
 }
 
-/* Assinatura — fumaça fria exalando dos cantos inferiores */
+/* Assinatura — companhia de inverno no rodapé */
 body::before {
-  content: "" !important;
+  content: "⛄          🐧          ☕          🧣" !important;
   position: fixed !important;
-  bottom: 0; left: -15vw;
-  width: 130vw; height: 34vh;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding-bottom: 8px;
+  white-space: pre;
+  font-size: 27px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
   pointer-events: none !important;
   z-index: 2147483645 !important;
-  will-change: transform;
-  mix-blend-mode: screen;
-  opacity: calc(0.5 * var(--aic-alpha, 1));
-  background:
-    radial-gradient(ellipse 35% 70% at 8% 100%, rgba(190, 225, 255, 0.4), transparent 70%),
-    radial-gradient(ellipse 35% 65% at 92% 100%, rgba(180, 220, 255, 0.38), transparent 70%),
-    radial-gradient(ellipse 50% 45% at 50% 105%, rgba(200, 230, 255, 0.22), transparent 75%);
-  animation: aic-inverno-fumaca calc(9s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+  opacity: calc(0.92 * var(--aic-alpha, 1));
+  filter: drop-shadow(0 2px 8px rgba(10, 40, 90, 0.4));
+  animation: aic-inverno-mascote calc(3.6s / var(--aic-speed, 1)) ease-in-out infinite alternate;
 }
 
 /* Grade — geada nas bordas + frio: -10% de saturação no site hospedeiro */
@@ -81,6 +83,8 @@ body::after {
     radial-gradient(ellipse 55% 45% at 100% 0%, rgba(200, 230, 255, 0.3), transparent 60%),
     radial-gradient(ellipse 55% 45% at 0% 100%, rgba(180, 215, 250, 0.32), transparent 60%),
     radial-gradient(ellipse 55% 45% at 100% 100%, rgba(180, 215, 250, 0.3), transparent 60%),
+    radial-gradient(ellipse 32% 20% at 8% 102%, rgba(190, 225, 255, 0.28), transparent 70%),
+    radial-gradient(ellipse 32% 18% at 92% 102%, rgba(180, 220, 255, 0.26), transparent 70%),
     linear-gradient(rgba(162, 210, 255, 0.08), rgba(162, 210, 255, 0.08));
 }
 
@@ -96,9 +100,9 @@ body::after {
   66%  { transform: translate3d(-1.2vw, -33vh, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
-@keyframes aic-inverno-fumaca {
-  from { transform: translate3d(-4vw, 1vh, 0); }
-  to   { transform: translate3d(4vw, -2vh, 0); }
+@keyframes aic-inverno-mascote {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -5px, 0); }
 }
 
 /* Site claro: flocos ganham contorno azul-aço para contraste */
@@ -108,7 +112,6 @@ body::after {
     text-shadow: 0 0 4px rgba(70, 120, 190, 0.9);
   }
   html::before { filter: contrast(1.35) brightness(0.8); }
-  body::before { mix-blend-mode: multiply; opacity: calc(0.28 * var(--aic-alpha, 1)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

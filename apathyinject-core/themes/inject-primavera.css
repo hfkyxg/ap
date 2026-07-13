@@ -47,6 +47,26 @@ html::after {
   animation: aic-prima-frente calc(10s / var(--aic-speed, 1)) linear infinite;
 }
 
+/* Assinatura — jardim vivo no rodapé */
+body::before {
+  content: "🦋          🌷          🐝          🌻" !important;
+  position: fixed !important;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding-bottom: 6px;
+  white-space: pre;
+  font-size: 26px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+  pointer-events: none !important;
+  z-index: 2147483645 !important;
+  opacity: calc(0.9 * var(--aic-alpha, 1));
+  filter: drop-shadow(0 2px 6px rgba(80, 40, 20, 0.3));
+  animation: aic-prima-mascote calc(3.2s / var(--aic-speed, 1)) ease-in-out infinite alternate;
+}
+
 /* Grade — luz de jardim: dourado no alto, verde no chão, rosa no ar */
 body::after {
   content: "" !important;
@@ -78,6 +98,10 @@ body::after {
   from { opacity: calc(0.9 * var(--aic-alpha, 1)); }
   to   { opacity: calc(0.6 * var(--aic-alpha, 1)); }
 }
+@keyframes aic-prima-mascote {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -6px, 0); }
+}
 
 /* Site claro: pétalas mais rosadas para não desbotar no branco */
 @media (prefers-color-scheme: light) {
@@ -86,7 +110,7 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html::before, html::after, body::after { animation: none !important; }
+  html::before, html::after, body::before, body::after { animation: none !important; }
 }
 
 /* ── Sutileza padrão: presença discreta; perfis eco/brutal continuam valendo ── */
