@@ -19,6 +19,9 @@ html::before {
     url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='10' height='10'%3E%3Cpath d='M12 2c4 4 5 9 0 14c-5-5-4-10 0-14z' fill='%23ffcad4' fill-opacity='0.8' transform='rotate(-20 12 12)'/%3E%3C/svg%3E");
   background-size: 120px 160px, 90px 160px;
   background-position: 0 0, 45px 80px;
+  /* Zona de Leitura: pétalas dançam nas margens, o texto respira */
+  -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.55) 60%, #000 88%);
+  mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.55) 60%, #000 88%);
   animation: aic-prima-fundo calc(13s / var(--aic-speed, 1)) linear infinite;
 }
 
@@ -39,6 +42,8 @@ html::after {
   will-change: transform;
   filter: blur(2px);
   opacity: calc(0.75 * var(--aic-alpha, 1));
+  -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, transparent 30%, rgba(0,0,0,0.45) 60%, #000 86%);
+  mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, transparent 30%, rgba(0,0,0,0.45) 60%, #000 86%);
   animation: aic-prima-frente calc(10s / var(--aic-speed, 1)) linear infinite;
 }
 

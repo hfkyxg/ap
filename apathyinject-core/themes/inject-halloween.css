@@ -19,6 +19,9 @@ html::before {
   will-change: transform;
   filter: drop-shadow(0 0 8px rgba(255, 120, 0, 0.5));
   opacity: calc(0.85 * var(--aic-alpha, 1));
+  /* Zona de Leitura: as almas rondam as bordas, não o texto */
+  -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, transparent 30%, rgba(0,0,0,0.45) 60%, #000 86%);
+  mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, transparent 30%, rgba(0,0,0,0.45) 60%, #000 86%);
   animation: aic-hallo-almas calc(16s / var(--aic-speed, 1)) linear infinite;
 }
 

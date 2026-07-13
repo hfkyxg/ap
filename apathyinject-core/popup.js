@@ -526,6 +526,35 @@
         handleTermInput(value);
       }
     });
+
+    // Navegação por teclado no grid: setas percorrem, Enter injeta,
+    // 1–9 injetam direto, R sorteia, Backspace expurga.
+    document.addEventListener("keydown", function (event) {
+      var tag = (event.target.tagName || "").toLowerCase();
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+      if (state.restricted) return;
+
+      var buttons = $$("#theme-grid .theme-btn");
+      if (!buttons.length) return;
+      var focused = buttons.indexOf(document.activeElement);
+
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        event.preventDefault();
+        buttons[(focused + 1 + buttons.length) % buttons.length].focus();
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        event.preventDefault();
+        buttons[(focused - 1 + buttons.length) % buttons.length].focus();
+      } else if (event.key >= "1" && event.key <= "9") {
+        var idx = parseInt(event.key, 10) - 1;
+        var theme = state.config.themes[idx];
+        if (theme) injectTheme({ type: "builtin", id: theme.id });
+      } else if (event.key === "r" || event.key === "R") {
+        $("#btn-random").click();
+      } else if (event.key === "Backspace" || event.key === "Delete") {
+        event.preventDefault();
+        clearState();
+      }
+    });
   }
 
   document.addEventListener("DOMContentLoaded", boot);

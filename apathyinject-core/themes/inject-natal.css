@@ -19,6 +19,9 @@ html::before {
     radial-gradient(circle at 75% 65%, rgba(230, 244, 255, 0.8) 1.1px, transparent 2px),
     radial-gradient(circle at 50% 85%, rgba(255, 255, 255, 0.6) 0.9px, transparent 1.8px);
   background-size: 110px 180px, 150px 180px, 90px 180px;
+  /* Zona de Leitura: neve rareia sobre a coluna central de texto */
+  -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.6) 60%, #000 88%);
+  mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.6) 60%, #000 88%);
   animation: aic-natal-neve-fundo calc(14s / var(--aic-speed, 1)) linear infinite;
 }
 
@@ -40,6 +43,8 @@ html::after {
   will-change: transform;
   filter: blur(0.8px);
   opacity: calc(0.9 * var(--aic-alpha, 1));
+  -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, transparent 30%, rgba(0,0,0,0.45) 60%, #000 86%);
+  mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, transparent 30%, rgba(0,0,0,0.45) 60%, #000 86%);
   animation: aic-natal-neve-frente calc(8s / var(--aic-speed, 1)) linear infinite;
 }
 

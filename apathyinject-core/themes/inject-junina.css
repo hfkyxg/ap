@@ -20,6 +20,9 @@ html::before {
   z-index: 2147483644 !important;
   will-change: transform;
   opacity: calc(0.7 * var(--aic-alpha, 1));
+  /* Zona de Leitura: balões sobem pelas margens */
+  -webkit-mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.55) 60%, #000 88%);
+  mask-image: radial-gradient(ellipse 52% 58% at 50% 46%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.55) 60%, #000 88%);
   animation: aic-junina-baloes calc(15s / var(--aic-speed, 1)) linear infinite;
 }
 

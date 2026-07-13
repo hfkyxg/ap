@@ -34,6 +34,7 @@ Atalho global: **`Alt + Shift + A`** — ativa/desativa o último tema sem abrir
 | **Protocolo Camaleão** | Cada tema localiza os menus (`nav`, `[role="navigation"]`) e logos (`[class*="logo"]`, `img[alt*="logo"]`) do site visitado e aplica o acento do tema: hairline no menu, glow no logo, hover colorido — só `box-shadow`/`filter`/`color`, zero impacto de layout. |
 | **Harmonia Automática** | `mix-blend-mode` + `@media (prefers-color-scheme)`: o tema enxerga se o site é claro ou escuro e ajusta contraste, saturação e blend sozinho. |
 | **Sutileza Padrão** | Presença discreta por padrão (`--aic-alpha: 0.72`, movimento 15% mais calmo). Perfis `eco`/`padrão`/`brutal` no popup graduam a intensidade. |
+| **Zona de Leitura** | `mask-image` radial esvazia as partículas sobre a coluna central de texto — os enfeites dançam nas margens e o conteúdo fica sempre legível. |
 | **Orquestrador Terminal** | Chat de suporte **sem LLM**. Regex gatekeeper: responde sobre a doc, bloqueia fuga de escopo. |
 | **JSON-Driven** | O catálogo de temas vive em `themes_config.json`. Adicionar 50 temas = editar o JSON, sem tocar no HTML. |
 

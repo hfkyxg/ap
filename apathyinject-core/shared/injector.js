@@ -135,8 +135,9 @@
     await chrome.storage.session.remove(tabKey(tabId));
   }
 
-  // Expurgo: remove tudo que o AIC injetou na aba, com fallback defensivo
-  // para o catálogo inteiro (removeCSS de arquivo não injetado é inofensivo).
+  // Expurgo otimizado: com estado conhecido, remove só o que foi injetado
+  // (1–3 chamadas). A varredura defensiva do catálogo inteiro fica reservada
+  // para quando o estado se perdeu (removeCSS de arquivo ausente é inofensivo).
   async function clearTab(tabId) {
     var state = await getTabState(tabId);
     var target = { tabId: tabId };
@@ -152,12 +153,12 @@
       if (state.override) {
         jobs.push(chrome.scripting.removeCSS({ target: target, css: state.override }));
       }
+    } else {
+      var config = await loadThemesConfig();
+      config.themes.forEach(function (theme) {
+        jobs.push(chrome.scripting.removeCSS({ target: target, files: [theme.file] }));
+      });
     }
-
-    var config = await loadThemesConfig();
-    config.themes.forEach(function (theme) {
-      jobs.push(chrome.scripting.removeCSS({ target: target, files: [theme.file] }));
-    });
 
     await Promise.allSettled(jobs);
     await clearTabState(tabId);
