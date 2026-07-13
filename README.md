@@ -30,6 +30,10 @@ Atalho global: **`Alt + Shift + A`** — ativa/desativa o último tema sem abrir
 |:----------|:-------------|
 | **Injeção Assíncrona** | Apenas o CSS do tema clicado entra no documento (*lazy loading*). A GPU assume o trabalho pesado. |
 | **Protocolo Fantasma** | Todo efeito visual carrega `pointer-events: none`. Você vê o caos, mas clica na página perfeitamente. |
+| **Protocolo 60fps** | Só `transform` anima (`translate3d`/`rotate3d`) com `will-change` — composição direta na GPU, loops matematicamente seamless, zero engasgo no scroll. |
+| **Protocolo Camaleão** | Cada tema localiza os menus (`nav`, `[role="navigation"]`) e logos (`[class*="logo"]`, `img[alt*="logo"]`) do site visitado e aplica o acento do tema: hairline no menu, glow no logo, hover colorido — só `box-shadow`/`filter`/`color`, zero impacto de layout. |
+| **Harmonia Automática** | `mix-blend-mode` + `@media (prefers-color-scheme)`: o tema enxerga se o site é claro ou escuro e ajusta contraste, saturação e blend sozinho. |
+| **Sutileza Padrão** | Presença discreta por padrão (`--aic-alpha: 0.72`, movimento 15% mais calmo). Perfis `eco`/`padrão`/`brutal` no popup graduam a intensidade. |
 | **Orquestrador Terminal** | Chat de suporte **sem LLM**. Regex gatekeeper: responde sobre a doc, bloqueia fuga de escopo. |
 | **JSON-Driven** | O catálogo de temas vive em `themes_config.json`. Adicionar 50 temas = editar o JSON, sem tocar no HTML. |
 

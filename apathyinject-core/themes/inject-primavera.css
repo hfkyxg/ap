@@ -83,3 +83,27 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   html::before, html::after, body::after { animation: none !important; }
 }
+
+/* ── Sutileza padrão: presença discreta; perfis eco/brutal continuam valendo ── */
+html { --aic-alpha: 0.72; --aic-speed: 0.85; }
+
+/* ── Protocolo Camaleão: localiza menus e logos do hospedeiro e aplica o
+      acento do tema — só box-shadow/filter/color, zero impacto de layout ── */
+nav, [role="navigation"], [class*="navbar" i] {
+  box-shadow: 0 1px 0 #ff7eb959, inset 0 -1px 0 #ff7eb930 !important;
+  transition: box-shadow 0.4s ease !important;
+}
+nav a, [role="navigation"] a {
+  transition: color 0.25s ease, text-shadow 0.25s ease !important;
+}
+nav a:hover, [role="navigation"] a:hover {
+  color: #ff7eb9 !important;
+  text-shadow: 0 0 8px #ff7eb955 !important;
+}
+[class*="logo" i], [id*="logo" i], img[alt*="logo" i], a[href="/"] > img {
+  filter: drop-shadow(0 0 6px #ff7eb944);
+  transition: filter 0.4s ease;
+}
+[class*="logo" i]:hover, [id*="logo" i]:hover {
+  filter: drop-shadow(0 0 12px #ff7eb988);
+}
